@@ -1,11 +1,25 @@
 function sceneB_set_platforms (platforms)
 {
-	for(let x = 0; x < 3200; x+=100) {
+	//ground
+	for(let x = 0; x <= 3200; x+=100) {
 		platforms.create(x, 600, 'BPlatform');
 	}
 
-	platforms.create(600, 400, 'BPlatform');
-	platforms.create(50, 250, 'BPlatform');
-	platforms.create(200, 350, 'BPlatform');
-	platforms.create(750, 220, 'BPlatform');	
+	//flying platforms
+	platforms.create(509,368, 'BPlatform2');
+	platforms.create(1145,203, 'BPlatform2');
+	platforms.create(2010,297, 'BPlatform2');
+	platforms.create(3200,292, 'BPlatform2');
+	
+	platforms.create(353,180, 'BPlatform3');
+	platforms.create(798,322, 'BPlatform3');
+	platforms.create(1050,422, 'BPlatform3');
+	platforms.create(1600,105, 'BPlatform3');
+	platforms.create(2400,231, 'BPlatform3');
+	platforms.create(2931,129, 'BPlatform3');
+	platforms.create(3380,461, 'BPlatform3');
+	
+	platforms.create(60,485, 'BPlatform4').setScale(1.5).refreshBody();
+	platforms.create(1344,485, 'BPlatform4').setScale(1.5).refreshBody();
+	platforms.create(2706,485, 'BPlatform4').setScale(1.5).refreshBody();
 }

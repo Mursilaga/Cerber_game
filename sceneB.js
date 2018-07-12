@@ -22,6 +22,9 @@ class SceneB extends Phaser.Scene {
 	{
         this.load.image('BSpace', './images/SceneB_Background.png');
 		this.load.image('BPlatform', './images/platform.png');
+		this.load.image('BPlatform2', './images/BPlatform2.png');
+		this.load.image('BPlatform3', './images/BPlatform3.png');
+		this.load.image('BPlatform4', './images/BPlatform4.png');
 		
 		this.load.image('ground', './images/ground.png');
 
@@ -163,12 +166,12 @@ class SceneB extends Phaser.Scene {
 		&& this.scene.player.body.touching.down)
 			this.scene.player.setVelocityY(-330);
 		
-		if(pointer.x > this.scene.player.body.x) {
+		if(pointer.x > (this.scene.player.body.x - this.scene.cameras.main.scrollX)) {
 			this.scene.rotate_right = true;
 			this.scene.player.setVelocityX(160);
 			this.scene.run = true;
 		}
-		else if (pointer.x < this.scene.player.body.x) {
+		else if (pointer.x < (this.scene.player.body.x - this.scene.cameras.main.scrollX)) {
 			this.scene.rotate_right = false;
 			this.scene.player.setVelocityX(-160);
 			this.scene.run = true;

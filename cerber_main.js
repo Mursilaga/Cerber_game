@@ -1,8 +1,8 @@
 var config = {
     type: Phaser.AUTO,
 	doubleTapDelay: 300,
-    width: screen.availWidth,
-    height: screen.availHeight,
+    width: 800, //screen.availWidth,
+    height: 600, //screen.availHeight,
 	physics: {
         default: 'arcade',
         arcade: {
