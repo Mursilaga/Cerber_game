@@ -6,12 +6,12 @@ function sceneB_set_platforms (platforms)
 	}
 
 	//flying platforms
-	platforms.create(509,368, 'BPlatform2');
+	platforms.create(489,388, 'BPlatform2');
 	platforms.create(1145,203, 'BPlatform2');
 	platforms.create(2010,297, 'BPlatform2');
 	platforms.create(3200,292, 'BPlatform2');
 	
-	platforms.create(353,180, 'BPlatform3');
+	platforms.create(373,180, 'BPlatform3');
 	platforms.create(798,322, 'BPlatform3');
 	platforms.create(1050,422, 'BPlatform3');
 	platforms.create(1600,105, 'BPlatform3');

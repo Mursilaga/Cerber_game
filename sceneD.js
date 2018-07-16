@@ -1,8 +1,8 @@
-class SceneB extends Phaser.Scene {
+class SceneD extends Phaser.Scene {
 
     constructor ()
     {
-        super('SceneB');
+        super('SceneD');
 
 		this.need_new_scene = false;
 		this.tapTime = 0;
@@ -20,17 +20,16 @@ class SceneB extends Phaser.Scene {
 
 	preload ()
 	{
-		this.load.image('life0', './images/life0.png');
+        this.load.image('DSpace', './images/SceneD_Background.png');
+		this.load.image('DSpace2', './images/SceneD_Background2.png');
 		
-        this.load.image('BSpace', './images/SceneB_Background.png');
-		this.load.image('BPlatform', './images/platform.png');
-		this.load.image('BPlatform', './images/platform.png');
-		this.load.image('BPlatform2', './images/BPlatform2.png');
-		this.load.image('BPlatform3', './images/BPlatform3.png');
-		this.load.image('BPlatform4', './images/BPlatform4.png');
-
+		this.load.image('DPlatform1', './images/DPlatform1.png');
+		this.load.image('DPlatform2', './images/DPlatform2.png');
+		this.load.image('DPlatform3', './images/DPlatform3.png');
+		this.load.image('DPlatform4', './images/DPlatform4.png');
+		this.load.image('DPlatform5', './images/DPlatform5.png');
+		
 		this.load.image('ground', './images/ground.png');
-
 		this.load.image('star', './images/soul.png');
 		this.load.spritesheet('wolf', 
 			'./images/wolf.png',
@@ -45,61 +44,25 @@ class SceneB extends Phaser.Scene {
 	
     create ()
     {
-		this.cameras.main.setBounds(0, 0, 3200, 600);
-		this.physics.world.setBounds(0, 0, 3200, 600);
+        this.cameras.main.setBounds(0, 0, 4228, 600);
+		this.physics.world.setBounds(0, 0, 4228, 600);
 
-		this.sceneText = this.add.text(300, 200, 'Scene B', { fontSize: '60px', fill: '#FFFFFF' }).setScrollFactor(0);
+		this.sceneText = this.add.text(300, 200, 'scene D', { fontSize: '60px', fill: '#FFFFFF' }).setScrollFactor(0);
 		
+		this.add.image(528, 300, 'DSpace');
+		this.add.image(1585, 300, 'DSpace2');
+		this.add.image(2642, 300, 'DSpace');
+		this.add.image(3699, 300, 'DSpace2');
 		
-		this.add.image(1600, 300, 'BSpace');
-				
-		sceneB_set_platforms(this.platforms);
+		sceneD_set_platforms(this.platforms);
 		
 		this.player = this.physics.add.sprite(100, 300, 'wolf');
 		this.player.setBounce(0);
 		this.player.setCollideWorldBounds(true);
 		this.player.body.setGravityY(100)
-
+		
 		this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
 		this.cameras.main.followOffset.set(-50, 0);
-		
-		this.anims.create({
-			key: 'left',
-			frames: this.anims.generateFrameNumbers('wolf', { start: 0, end: 4 }),
-			frameRate: 10,
-			repeat: -1
-		});
-
-		this.anims.create({
-			key: 'right',
-			frames: this.anims.generateFrameNumbers('wolf', { start: 6, end: 10 }),
-			frameRate: 10,
-			repeat: -1
-		});
-		
-		this.anims.create({
-			key: 'turn_right',
-			frames: [ { key: 'wolf', frame: 6 } ],
-			frameRate: 20
-		});
-		
-		this.anims.create({
-			key: 'turn_left',
-			frames: [ { key: 'wolf', frame: 4 } ],
-			frameRate: 20
-		});
-		
-		this.anims.create({
-			key: 'fly_left',
-			frames: [ { key: 'wolf', frame: 2 } ],
-			frameRate: 20
-		});
-		
-		this.anims.create({
-			key: 'fly_right',
-			frames: [ { key: 'wolf', frame: 8 } ],
-			frameRate: 20
-		});
 		
 		this.stars = this.physics.add.group({
 			key: 'star',
@@ -109,9 +72,7 @@ class SceneB extends Phaser.Scene {
 		
 		this.evilstars = this.physics.add.group();
 		
-		this.scoreText = this.add.text(16, 16, 'Scene B. Score: 0', { fontSize: '32px', fill: '#FFFFFF' }).setScrollFactor(0);
-		this.add.image(300, 200, 'life0').setScrollFactor(0);
-		
+		this.scoreText = this.add.text(16, 16, 'scene D. Score: 0', { fontSize: '32px', fill: '#FFFFFF' }).setScrollFactor(0);
 		this.physics.add.collider(this.stars, this.platforms);
 		this.physics.add.collider(this.evilstars, this.platforms);
 		this.physics.add.collider(this.player, this.platforms);
@@ -155,17 +116,17 @@ class SceneB extends Phaser.Scene {
 			}
 		}
 	}
-
-    update (time, delta) {
+	
+    update (time, delta)
+    {
 		if(this.need_new_scene) {
-			this.scene.start('SceneC');
+			this.scene.start('SceneA');
 			this.need_new_scene = false;
 		}
 		
 		this.input.on('pointerdown', this.tapDown);
 		this.input.on('pointerup', this.tapUp);
-		this.animate_player();		
-		//this.scene.start('SceneD');
+		this.animate_player();	
     }
 	
 	tapDown (pointer) {
