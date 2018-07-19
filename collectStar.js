@@ -10,6 +10,7 @@ function collectStar (player, star)
 		this.physics.pause();
 		this.player.setTint(0x00ff00);
 		this.need_new_scene = true;
+		
 		//  A new batch of this.stars to collect
 		this.stars.children.iterate(function (child) {
 			var cx = Phaser.Math.Between(0, 800);

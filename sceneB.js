@@ -5,6 +5,7 @@ class SceneB extends Phaser.Scene {
         super('SceneB');
 
 		this.need_new_scene = false;
+		this.need_restart = false;
 		this.tapTime = 0;
 		this.player = null;
 		this.stars = null;
@@ -124,7 +125,7 @@ class SceneB extends Phaser.Scene {
 		
 		this.add.image(700, 25, 'interface_life').setScrollFactor(0);
 
-		this.lives.create(690, 30, 'life_image').setScrollFactor(0);
+		this.lives.create(690, 30, 'life_image').setScrollFactor(0).setTint(0x673A3A);
 		this.lives.create(720, 30, 'life_image').setScrollFactor(0);
 		this.lives.create(750, 30, 'life_image').setScrollFactor(0);
 		
@@ -204,6 +205,11 @@ class SceneB extends Phaser.Scene {
 			this.scene.rotate_right = false;
 			this.scene.player.setVelocityX(-160);
 			this.scene.run = true;
+		}
+		
+		if(this.scene.need_restart) {
+			this.scene.need_restart = false;
+			this.scene.scene.restart();
 		}
 	}
 	

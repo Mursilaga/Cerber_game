@@ -78,7 +78,7 @@ class SceneD extends Phaser.Scene {
 		this.physics.add.collider(this.player, this.platforms);
 		
 		this.physics.add.overlap(this.player, this.stars, collectStar, null, this);
-		this.physics.add.collider(this.player, this.evilstars, hitBomb, null, this);
+		this.physics.add.collider(this.player, this.evilstars, hitEnemy, null, this);
 
 
 		this.stars.children.iterate(function (child) {
