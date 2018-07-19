@@ -1,4 +1,4 @@
-function hitBomb (player, evilstar) 
+function hitEnemy (player, evilstar) 
 {
 	this.physics.pause();
 	this.player.setTint(0xff0000);

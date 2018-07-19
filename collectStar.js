@@ -1,7 +1,7 @@
 function collectStar (player, star)
 {
 	this.score += 10;
-	this.scoreText.setText('Score: ' + this.score);
+	this.scoreText.setText(this.score);
 		
 	star.disableBody(true, true);
 

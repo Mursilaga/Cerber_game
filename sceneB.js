@@ -11,16 +11,23 @@ class SceneB extends Phaser.Scene {
 		this.evilstars = null;
 		this.platforms = null;
 		this.cursors = null;
-		this.score = 0;
+		
 		this.scoreText = null;
 		this.rotate_right = true;
 		this.fly = false;
 		this.run = false;
+		
+		this.lives = null;
+		this.score = 0;
+	
     }
 
 	preload ()
-	{
-		this.load.image('life0', './images/life0.png');
+	{		
+		this.load.image('interface', './images/interface.png');
+		this.load.image('interface_life', './images/interface_life.png');
+		this.load.image('interface_score', './images/interface_score.png');
+		this.load.image('life_image', './images/life.png');
 		
         this.load.image('BSpace', './images/SceneB_Background.png');
 		this.load.image('BPlatform', './images/platform.png');
@@ -40,19 +47,19 @@ class SceneB extends Phaser.Scene {
 			'./images/enemy.png',
 			{ frameWidth: 52, frameHeight: 32 } );
 		this.platforms = this.physics.add.staticGroup();
+		this.lives = this.physics.add.staticGroup();
 		this.cursors = this.input.keyboard.createCursorKeys();
 	}
 	
     create ()
-    {
+    {	
 		this.cameras.main.setBounds(0, 0, 3200, 600);
 		this.physics.world.setBounds(0, 0, 3200, 600);
 
 		this.sceneText = this.add.text(300, 200, 'Scene B', { fontSize: '60px', fill: '#FFFFFF' }).setScrollFactor(0);
 		
-		
 		this.add.image(1600, 300, 'BSpace');
-				
+		
 		sceneB_set_platforms(this.platforms);
 		
 		this.player = this.physics.add.sprite(100, 300, 'wolf');
@@ -107,17 +114,26 @@ class SceneB extends Phaser.Scene {
 			setXY: { x: 12, y: 0, stepX: 70 }
 		});
 		
+		
 		this.evilstars = this.physics.add.group();
 		
-		this.scoreText = this.add.text(16, 16, 'Scene B. Score: 0', { fontSize: '32px', fill: '#FFFFFF' }).setScrollFactor(0);
-		this.add.image(300, 200, 'life0').setScrollFactor(0);
+		
+
+		this.add.image(100, 25, 'interface_score').setScrollFactor(0);
+		this.scoreText = this.add.text(100, 13, '0', { fontSize: '14px', fontFamily: 'Calibri', fontStyle: 'Bold', fill: '#FFe471' }).setScrollFactor(0);
+		
+		this.add.image(700, 25, 'interface_life').setScrollFactor(0);
+
+		this.lives.create(690, 30, 'life_image').setScrollFactor(0);
+		this.lives.create(720, 30, 'life_image').setScrollFactor(0);
+		this.lives.create(750, 30, 'life_image').setScrollFactor(0);
 		
 		this.physics.add.collider(this.stars, this.platforms);
 		this.physics.add.collider(this.evilstars, this.platforms);
 		this.physics.add.collider(this.player, this.platforms);
 		
 		this.physics.add.overlap(this.player, this.stars, collectStar, null, this);
-		this.physics.add.collider(this.player, this.evilstars, hitBomb, null, this);
+		this.physics.add.collider(this.player, this.evilstars, hitEnemy, null, this);
 
 
 		this.stars.children.iterate(function (child) {
@@ -126,6 +142,16 @@ class SceneB extends Phaser.Scene {
 			child.setVelocity(Phaser.Math.Between(-200, 200), 20);
 			child.allowGravity = false;
 		});
+		
+		
+		
+		var graphics = this.add.graphics({ lineStyle: { width: 2, color: 0xaaaa00 } });
+		var triangle = new Phaser.Geom.Triangle.BuildEquilateral(400, 25, 450);
+		graphics.strokeTriangleShape(triangle);
+		
+		//this.physics.add.body(300, 300).setGameObject(triangle).
+		//this.physics.add.collider(this.player, triangle);
+		//this.platforms.create(489,388, 'BPlatform2').setGameObject(triangle);
     }
 
 	animate_player () {

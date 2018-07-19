@@ -4,18 +4,18 @@ class SceneD extends Phaser.Scene {
     {
         super('SceneD');
 
-		this.need_new_scene = false;
-		this.tapTime = 0;
-		this.player = null;
-		this.stars = null;
-		this.evilstars = null;
-		this.platforms = null;
-		this.cursors = null;
-		this.score = 0;
-		this.scoreText = null;
-		this.rotate_right = true;
-		this.fly = false;
-		this.run = false;
+//		this.need_new_scene = false;
+//		this.tapTime = 0;
+//		this.player = null;
+//		this.stars = null;
+//		this.evilstars = null;
+//		this.platforms = null;
+//		this.cursors = null;
+//		this.score = 0;
+//		this.scoreText = null;
+//		this.rotate_right = true;
+//		this.fly = false;
+//		this.run = false;
     }
 
 	preload ()
