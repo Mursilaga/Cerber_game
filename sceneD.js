@@ -34,6 +34,11 @@ class SceneD extends Phaser.Scene {
 		this.load.spritesheet('wolf', 
 			'./images/wolf.png',
 			{ frameWidth: 52, frameHeight: 32 } );
+			
+		this.load.spritesheet('cyborg', 
+			'./images/cyborg.png',
+			{ frameWidth: 44, frameHeight: 61 } );
+			
 		this.load.image('evilstar', './images/evilstar.png');
 		this.load.spritesheet('enemy', 
 			'./images/enemy.png',
@@ -56,10 +61,10 @@ class SceneD extends Phaser.Scene {
 		
 		sceneD_set_platforms(this.platforms);
 		
-		this.player = this.physics.add.sprite(100, 300, 'wolf');
+		this.player = this.physics.add.sprite(3300, 300, 'wolf');
 		this.player.setBounce(0);
 		this.player.setCollideWorldBounds(true);
-		this.player.body.setGravityY(100)
+		this.player.body.setGravityY(100);
 		
 		this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
 		this.cameras.main.followOffset.set(-50, 0);
@@ -80,11 +85,32 @@ class SceneD extends Phaser.Scene {
 		this.physics.add.overlap(this.player, this.stars, collectStar, null, this);
 		this.physics.add.collider(this.player, this.evilstars, hitEnemy, null, this);
 
+		var evilstar = this.evilstars.create(3000, 500, 'cyborg');
+		evilstar.setBounce(0);
+		evilstar.setCollideWorldBounds(true);
+		evilstar.setVelocity(Phaser.Math.Between(-100, -99), 0);
+		evilstar.body.setGravityY(100);	
+		
+		this.anims.create({
+			key: 'robot_left',
+			frames: this.anims.generateFrameNumbers('cyborg', { start: 0, end: 5 }),
+			frameRate: 4,
+			repeat: -1
+		});
 
+		this.anims.create({
+			key: 'robot_right',
+			frames: this.anims.generateFrameNumbers('cyborg', { start: 6, end: 11 }),
+			frameRate: 4,
+			repeat: -1
+		});
+		
+		evilstar.anims.play('robot_left', true);
+		
 		this.stars.children.iterate(function (child) {
 			child.setBounce(1);
 			child.setCollideWorldBounds(true);
-			child.setVelocity(Phaser.Math.Between(-200, 200), 20);
+			child.setVelocity(Phaser.Math.Between(190, 200), 0);
 			child.allowGravity = false;
 		});
     }

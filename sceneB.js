@@ -44,9 +44,9 @@ class SceneB extends Phaser.Scene {
 			'./images/wolf.png',
 			{ frameWidth: 52, frameHeight: 32 } );
 		this.load.image('evilstar', './images/evilstar.png');
-		this.load.spritesheet('enemy', 
-			'./images/enemy.png',
-			{ frameWidth: 52, frameHeight: 32 } );
+		this.load.spritesheet('demon', 
+			'./images/demon.png',
+			{ frameWidth: 57, frameHeight: 62 } );
 		this.platforms = this.physics.add.staticGroup();
 		this.lives = this.physics.add.staticGroup();
 		this.cursors = this.input.keyboard.createCursorKeys();
@@ -66,7 +66,7 @@ class SceneB extends Phaser.Scene {
 		this.player = this.physics.add.sprite(100, 300, 'wolf');
 		this.player.setBounce(0);
 		this.player.setCollideWorldBounds(true);
-		this.player.body.setGravityY(100)
+		this.player.body.setGravityY(100);
 
 		this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
 		this.cameras.main.followOffset.set(-50, 0);
@@ -109,6 +109,20 @@ class SceneB extends Phaser.Scene {
 			frameRate: 20
 		});
 		
+		this.anims.create({
+			key: 'demon_fly_left',
+			frames: this.anims.generateFrameNumbers('demon', { start: 0, end: 5 }),
+			frameRate: 8,
+			repeat: -1
+		});
+		
+		this.anims.create({
+			key: 'demon_fly_right',
+			frames: this.anims.generateFrameNumbers('demon', { start: 6, end: 11 }),
+			frameRate: 8,
+			repeat: -1
+		});
+		
 		this.stars = this.physics.add.group({
 			key: 'star',
 			repeat: 11,
@@ -121,7 +135,7 @@ class SceneB extends Phaser.Scene {
 		
 
 		this.add.image(100, 25, 'interface_score').setScrollFactor(0);
-		this.scoreText = this.add.text(100, 13, '0', { fontSize: '14px', fontFamily: 'Calibri', fontStyle: 'Bold', fill: '#FFe471' }).setScrollFactor(0);
+		this.scoreText = this.add.text(73, 13, '0', { fontSize: '14px', fontFamily: 'Calibri', fontStyle: 'Bold', fill: '#FFe471' }).setScrollFactor(0);
 		
 		this.add.image(700, 25, 'interface_life').setScrollFactor(0);
 
@@ -142,17 +156,16 @@ class SceneB extends Phaser.Scene {
 			child.setCollideWorldBounds(true);
 			child.setVelocity(Phaser.Math.Between(-200, 200), 20);
 			child.allowGravity = false;
-		});
+		});	
 		
-		
-		
-		var graphics = this.add.graphics({ lineStyle: { width: 2, color: 0xaaaa00 } });
-		var triangle = new Phaser.Geom.Triangle.BuildEquilateral(400, 25, 450);
-		graphics.strokeTriangleShape(triangle);
-		
-		//this.physics.add.body(300, 300).setGameObject(triangle).
-		//this.physics.add.collider(this.player, triangle);
-		//this.platforms.create(489,388, 'BPlatform2').setGameObject(triangle);
+		var evilstar = this.evilstars.create(350, 500, 'demon');
+		evilstar.setBounce(0);
+		evilstar.setCollideWorldBounds(true);
+		evilstar.setVelocity(0, 0);
+		evilstar.allowGravity = false;
+		evilstar.setSize(40, 40, true);
+		evilstar.setOffset(0, 20);
+		evilstar.anims.play('demon_fly_right', true);
     }
 
 	animate_player () {

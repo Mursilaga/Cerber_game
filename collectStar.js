@@ -20,9 +20,12 @@ function collectStar (player, star)
 		});
 	}
 		var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-		var evilstar = this.evilstars.create(x, 16, 'evilstar');
+		var evilstar = this.evilstars.create(x, 16, 'demon');
 		evilstar.setBounce(1);
 		evilstar.setCollideWorldBounds(true);
 		evilstar.setVelocity(Phaser.Math.Between(-200, 200), 20);
-		evilstar.allowGravity = false;		
+		evilstar.allowGravity = false;
+		evilstar.setSize(40, 40, true);
+		evilstar.setOffset(0, 20);
+		evilstar.anims.play('demon_fly_right', true);
 }
