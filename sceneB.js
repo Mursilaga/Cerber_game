@@ -3,33 +3,10 @@ class SceneB extends Phaser.Scene {
     constructor ()
     {
         super('SceneB');
-
-		this.need_new_scene = false;
-		this.need_restart = false;
-		this.tapTime = 0;
-		this.player = null;
-		this.stars = null;
-		this.evilstars = null;
-		this.platforms = null;
-		this.cursors = null;
-		
-		this.scoreText = null;
-		this.rotate_right = true;
-		this.fly = false;
-		this.run = false;
-		
-		this.lives = null;
-		this.score = 0;
-	
     }
 
 	preload ()
-	{		
-		this.load.image('interface', './images/interface.png');
-		this.load.image('interface_life', './images/interface_life.png');
-		this.load.image('interface_score', './images/interface_score.png');
-		this.load.image('life_image', './images/life.png');
-		
+	{			
         this.load.image('BSpace', './images/SceneB_Background.png');
 		this.load.image('BPlatform', './images/platform.png');
 		this.load.image('BPlatform', './images/platform.png');
@@ -37,16 +14,13 @@ class SceneB extends Phaser.Scene {
 		this.load.image('BPlatform3', './images/BPlatform3.png');
 		this.load.image('BPlatform4', './images/BPlatform4.png');
 
-		this.load.image('ground', './images/ground.png');
-
 		this.load.image('star', './images/soul.png');
-		this.load.spritesheet('wolf', 
-			'./images/wolf.png',
-			{ frameWidth: 52, frameHeight: 32 } );
+
 		this.load.image('evilstar', './images/evilstar.png');
 		this.load.spritesheet('demon', 
 			'./images/demon.png',
-			{ frameWidth: 57, frameHeight: 62 } );
+			{ frameWidth: 66, frameHeight: 62 } );
+			
 		this.platforms = this.physics.add.staticGroup();
 		this.lives = this.physics.add.staticGroup();
 		this.cursors = this.input.keyboard.createCursorKeys();
@@ -56,8 +30,6 @@ class SceneB extends Phaser.Scene {
     {	
 		this.cameras.main.setBounds(0, 0, 3200, 600);
 		this.physics.world.setBounds(0, 0, 3200, 600);
-
-		this.sceneText = this.add.text(300, 200, 'Scene B', { fontSize: '60px', fill: '#FFFFFF' }).setScrollFactor(0);
 		
 		this.add.image(1600, 300, 'BSpace');
 		
@@ -70,45 +42,7 @@ class SceneB extends Phaser.Scene {
 
 		this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
 		this.cameras.main.followOffset.set(-50, 0);
-		
-		this.anims.create({
-			key: 'left',
-			frames: this.anims.generateFrameNumbers('wolf', { start: 0, end: 4 }),
-			frameRate: 10,
-			repeat: -1
-		});
-
-		this.anims.create({
-			key: 'right',
-			frames: this.anims.generateFrameNumbers('wolf', { start: 6, end: 10 }),
-			frameRate: 10,
-			repeat: -1
-		});
-		
-		this.anims.create({
-			key: 'turn_right',
-			frames: [ { key: 'wolf', frame: 6 } ],
-			frameRate: 20
-		});
-		
-		this.anims.create({
-			key: 'turn_left',
-			frames: [ { key: 'wolf', frame: 4 } ],
-			frameRate: 20
-		});
-		
-		this.anims.create({
-			key: 'fly_left',
-			frames: [ { key: 'wolf', frame: 2 } ],
-			frameRate: 20
-		});
-		
-		this.anims.create({
-			key: 'fly_right',
-			frames: [ { key: 'wolf', frame: 8 } ],
-			frameRate: 20
-		});
-		
+				
 		this.anims.create({
 			key: 'demon_fly_left',
 			frames: this.anims.generateFrameNumbers('demon', { start: 0, end: 5 }),
@@ -158,14 +92,14 @@ class SceneB extends Phaser.Scene {
 			child.allowGravity = false;
 		});	
 		
-		var evilstar = this.evilstars.create(350, 500, 'demon');
+		var evilstar = this.evilstars.create(300, 500, 'demon');
 		evilstar.setBounce(0);
 		evilstar.setCollideWorldBounds(true);
-		evilstar.setVelocity(0, 0);
+		evilstar.setVelocity(-50, 0);
 		evilstar.allowGravity = false;
-		evilstar.setSize(40, 40, true);
-		evilstar.setOffset(0, 20);
-		evilstar.anims.play('demon_fly_right', true);
+		evilstar.setSize(24, 40, true);
+		evilstar.setOffset(21, 20);
+		evilstar.anims.play('demon_fly_left', true);
     }
 
 	animate_player () {
@@ -195,6 +129,17 @@ class SceneB extends Phaser.Scene {
 			}
 		}
 	}
+	
+	animate_demons () {
+		if(this.evilstars != undefined && this.evilstars.countActive(true) > 0) {
+			this.evilstars.children.iterate(function (child) {
+				if(child.body.velocity.x >= 0)
+					child.anims.play('demon_fly_right', true);
+				else
+					child.anims.play('demon_fly_left', true);
+			});
+		}
+	}
 
     update (time, delta) {
 		if(this.need_new_scene) {
@@ -204,7 +149,8 @@ class SceneB extends Phaser.Scene {
 		
 		this.input.on('pointerdown', this.tapDown);
 		this.input.on('pointerup', this.tapUp);
-		this.animate_player();		
+		this.animate_player();
+		this.animate_demons();
 		//this.scene.start('SceneD');
     }
 	
@@ -230,11 +176,6 @@ class SceneB extends Phaser.Scene {
 		if( pointer.upTime - pointer.downTime < config.doubleTapDelay 
 		&& this.scene.player.body.touching.down) {
 			this.scene.player.setVelocityY(-330);
-			this.scene.sceneText.text = "y";
-		}
-		else
-		{
-			this.scene.sceneText.text = "no";
 		}
 			this.scene.tapTime = pointer.downTime;
 			this.scene.player.setVelocityX(0);

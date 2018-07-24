@@ -19,13 +19,17 @@ function collectStar (player, star)
 			child.setVelocity(Phaser.Math.Between(-200, 200), 20)
 		});
 	}
-		var x = (player.x < 400) ? Phaser.Math.Between(400, 800) : Phaser.Math.Between(0, 400);
-		var evilstar = this.evilstars.create(x, 16, 'demon');
+		var x = Phaser.Math.Between(player.x - 400, player.x + 400);
+		if( (x - player.x > 0) && (x - player.x < 100) )
+			x += 100;
+		else if ( (x - player.x < 0) && (x - player.x > -100) )
+			x -= 100;
+		
+		var evilstar = this.evilstars.create(x, 0, 'demon');
 		evilstar.setBounce(1);
 		evilstar.setCollideWorldBounds(true);
 		evilstar.setVelocity(Phaser.Math.Between(-200, 200), 20);
 		evilstar.allowGravity = false;
-		evilstar.setSize(40, 40, true);
-		evilstar.setOffset(0, 20);
-		evilstar.anims.play('demon_fly_right', true);
+		evilstar.setSize(24, 40, true);
+		evilstar.setOffset(21, 20);
 }
