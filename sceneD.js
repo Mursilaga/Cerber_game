@@ -124,18 +124,17 @@ class SceneD extends Phaser.Scene {
 		this.input.on('pointerdown', this.tapDown);
 		this.input.on('pointerup', this.tapUp);
 		animate_player(this.player);
+		this.animate_demons();
     }
 	
 	tapDown (pointer) {
 		if(pointer.x > (this.scene.player.body.x - this.scene.cameras.main.scrollX)) {
 			this.scene.player.rotate_right = true;
 			this.scene.player.setVelocityX(160);
-			this.scene.player.run = true;
 		}
 		else if (pointer.x < (this.scene.player.body.x - this.scene.cameras.main.scrollX)) {
 			this.scene.player.rotate_right = false;
 			this.scene.player.setVelocityX(-160);
-			this.scene.player.run = true;
 		}
 		
 		if(this.scene.need_restart) {
@@ -151,6 +150,5 @@ class SceneD extends Phaser.Scene {
 		}
 			this.scene.tapTime = pointer.downTime;
 			this.scene.player.setVelocityX(0);
-			this.scene.player.run = false;
 	}
 }
