@@ -39,6 +39,9 @@ class SceneB extends Phaser.Scene {
 		this.player.setBounce(0);
 		this.player.setCollideWorldBounds(true);
 		this.player.body.setGravityY(100);
+		this.player.rotate_right = true;
+		this.player.run = false;
+		this.player.fly = false;
 
 		this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
 		this.cameras.main.followOffset.set(-50, 0);
@@ -101,34 +104,6 @@ class SceneB extends Phaser.Scene {
 		evilstar.setOffset(21, 20);
 		evilstar.anims.play('demon_fly_left', true);
     }
-
-	animate_player () {
-		if(this.player.body != undefined) {
-			if(!this.player.body.touching.down)
-				this.fly = true;
-			else 
-				this.fly = false;
-			
-			if (this.rotate_right)
-			{
-				if(this.fly)
-					this.player.anims.play('fly_right', true);
-				else if (this.run)
-					this.player.anims.play('right', true);
-				else 
-					this.player.anims.play('turn_right', true);
-			}
-			else
-			{
-				if(this.fly)
-					this.player.anims.play('fly_left', true);
-				else if (this.run)
-					this.player.anims.play('left', true);
-				else 
-					this.player.anims.play('turn_left', true);
-			}
-		}
-	}
 	
 	animate_demons () {
 		if(this.evilstars != undefined && this.evilstars.countActive(true) > 0) {
@@ -149,21 +124,22 @@ class SceneB extends Phaser.Scene {
 		
 		this.input.on('pointerdown', this.tapDown);
 		this.input.on('pointerup', this.tapUp);
-		this.animate_player();
+		//this.animate_player();
+		animate_player(this.player);
 		this.animate_demons();
-		//this.scene.start('SceneD');
+		this.scene.start('SceneD');
     }
 	
 	tapDown (pointer) {
 		if(pointer.x > (this.scene.player.body.x - this.scene.cameras.main.scrollX)) {
-			this.scene.rotate_right = true;
+			this.scene.player.rotate_right = true;
 			this.scene.player.setVelocityX(160);
-			this.scene.run = true;
+			this.scene.player.run = true;
 		}
 		else if (pointer.x < (this.scene.player.body.x - this.scene.cameras.main.scrollX)) {
-			this.scene.rotate_right = false;
+			this.scene.player.rotate_right = false;
 			this.scene.player.setVelocityX(-160);
-			this.scene.run = true;
+			this.scene.player.run = true;
 		}
 		
 		if(this.scene.need_restart) {
@@ -179,6 +155,6 @@ class SceneB extends Phaser.Scene {
 		}
 			this.scene.tapTime = pointer.downTime;
 			this.scene.player.setVelocityX(0);
-			this.scene.run = false;
+			this.scene.player.run = false;
 	}
 }

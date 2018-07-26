@@ -4,18 +4,6 @@ class SceneD extends Phaser.Scene {
     {
         super('SceneD');
 
-//		this.need_new_scene = false;
-//		this.tapTime = 0;
-//		this.player = null;
-//		this.stars = null;
-//		this.evilstars = null;
-//		this.platforms = null;
-//		this.cursors = null;
-//		this.score = 0;
-//		this.scoreText = null;
-//		this.rotate_right = true;
-//		this.fly = false;
-//		this.run = false;
     }
 
 	preload ()
@@ -114,32 +102,15 @@ class SceneD extends Phaser.Scene {
 			child.allowGravity = false;
 		});
     }
-
-	animate_player () {
-		if(this.player.body != undefined) {
-			if(!this.player.body.touching.down)
-				this.fly = true;
-			else 
-				this.fly = false;
-			
-			if (this.rotate_right)
-			{
-				if(this.fly)
-					this.player.anims.play('fly_right', true);
-				else if (this.run)
-					this.player.anims.play('right', true);
-				else 
-					this.player.anims.play('turn_right', true);
-			}
-			else
-			{
-				if(this.fly)
-					this.player.anims.play('fly_left', true);
-				else if (this.run)
-					this.player.anims.play('left', true);
-				else 
-					this.player.anims.play('turn_left', true);
-			}
+	
+	animate_demons () {
+		if(this.evilstars != undefined && this.evilstars.countActive(true) > 0) {
+			this.evilstars.children.iterate(function (child) {
+				if(child.body.velocity.x >= 0)
+					child.anims.play('demon_fly_right', true);
+				else
+					child.anims.play('demon_fly_left', true);
+			});
 		}
 	}
 	
@@ -152,19 +123,24 @@ class SceneD extends Phaser.Scene {
 		
 		this.input.on('pointerdown', this.tapDown);
 		this.input.on('pointerup', this.tapUp);
-		this.animate_player();	
+		animate_player(this.player);
     }
 	
 	tapDown (pointer) {
 		if(pointer.x > (this.scene.player.body.x - this.scene.cameras.main.scrollX)) {
-			this.scene.rotate_right = true;
+			this.scene.player.rotate_right = true;
 			this.scene.player.setVelocityX(160);
-			this.scene.run = true;
+			this.scene.player.run = true;
 		}
 		else if (pointer.x < (this.scene.player.body.x - this.scene.cameras.main.scrollX)) {
-			this.scene.rotate_right = false;
+			this.scene.player.rotate_right = false;
 			this.scene.player.setVelocityX(-160);
-			this.scene.run = true;
+			this.scene.player.run = true;
+		}
+		
+		if(this.scene.need_restart) {
+			this.scene.need_restart = false;
+			this.scene.scene.restart();
 		}
 	}
 	
@@ -172,14 +148,9 @@ class SceneD extends Phaser.Scene {
 		if( pointer.upTime - pointer.downTime < config.doubleTapDelay 
 		&& this.scene.player.body.touching.down) {
 			this.scene.player.setVelocityY(-330);
-			this.scene.sceneText.text = "y";
-		}
-		else
-		{
-			this.scene.sceneText.text = "no";
 		}
 			this.scene.tapTime = pointer.downTime;
 			this.scene.player.setVelocityX(0);
-			this.scene.run = false;
+			this.scene.player.run = false;
 	}
 }
