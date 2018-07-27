@@ -19,9 +19,6 @@ class SceneA extends Phaser.Scene {
 		this.rotate_right = true;
 		this.fly = false;
 		this.run = false;
-		
-		this.lives = null;
-		this.score = 0;
     }
 
 	preload ()

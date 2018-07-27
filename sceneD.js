@@ -39,8 +39,6 @@ class SceneD extends Phaser.Scene {
     {
         this.cameras.main.setBounds(0, 0, 4228, 600);
 		this.physics.world.setBounds(0, 0, 4228, 600);
-
-		this.sceneText = this.add.text(300, 200, 'scene D', { fontSize: '60px', fill: '#FFFFFF' }).setScrollFactor(0);
 		
 		this.add.image(528, 300, 'DSpace');
 		this.add.image(1585, 300, 'DSpace2');
@@ -55,7 +53,7 @@ class SceneD extends Phaser.Scene {
 		this.player.body.setGravityY(100);
 		
 		this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
-		this.cameras.main.followOffset.set(-50, 0);
+		this.cameras.main.followOffset.set(0, 0);
 		
 		this.stars = this.physics.add.group({
 			key: 'star',
@@ -73,6 +71,8 @@ class SceneD extends Phaser.Scene {
 		this.physics.add.overlap(this.player, this.stars, collectStar, null, this);
 		this.physics.add.collider(this.player, this.evilstars, hitEnemy, null, this);
 
+		add_interface(this);
+		
 		var evilstar = this.evilstars.create(3000, 500, 'cyborg');
 		evilstar.setBounce(0);
 		evilstar.setCollideWorldBounds(true);
@@ -128,11 +128,11 @@ class SceneD extends Phaser.Scene {
     }
 	
 	tapDown (pointer) {
-		if(pointer.x > (this.scene.player.body.x - this.scene.cameras.main.scrollX)) {
+		if(pointer.x > (config.width/2) ) {
 			this.scene.player.rotate_right = true;
 			this.scene.player.setVelocityX(160);
 		}
-		else if (pointer.x < (this.scene.player.body.x - this.scene.cameras.main.scrollX)) {
+		else if (pointer.x < (config.width/2) ) {
 			this.scene.player.rotate_right = false;
 			this.scene.player.setVelocityX(-160);
 		}

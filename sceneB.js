@@ -22,7 +22,6 @@ class SceneB extends Phaser.Scene {
 			{ frameWidth: 66, frameHeight: 62 } );
 			
 		this.platforms = this.physics.add.staticGroup();
-		this.lives = this.physics.add.staticGroup();
 		this.cursors = this.input.keyboard.createCursorKeys();
 	}
 	
@@ -67,16 +66,7 @@ class SceneB extends Phaser.Scene {
 		
 		this.evilstars = this.physics.add.group();
 		
-		
-
-		this.add.image(100, 25, 'interface_score').setScrollFactor(0);
-		this.scoreText = this.add.text(73, 13, '0', { fontSize: '14px', fontFamily: 'Calibri', fontStyle: 'Bold', fill: '#FFe471' }).setScrollFactor(0);
-		
-		this.add.image(700, 25, 'interface_life').setScrollFactor(0);
-
-		this.lives.create(690, 30, 'life_image').setScrollFactor(0).setTint(0x673A3A);
-		this.lives.create(720, 30, 'life_image').setScrollFactor(0);
-		this.lives.create(750, 30, 'life_image').setScrollFactor(0);
+		add_interface(this);
 		
 		this.physics.add.collider(this.stars, this.platforms);
 		this.physics.add.collider(this.evilstars, this.platforms);
@@ -128,11 +118,11 @@ class SceneB extends Phaser.Scene {
     }
 	
 	tapDown (pointer) {
-		if(pointer.x > (this.scene.player.body.x - this.scene.cameras.main.scrollX)) {
+		if(pointer.x > (config.width/2) ) {
 			this.scene.player.rotate_right = true;
 			this.scene.player.setVelocityX(160);
 		}
-		else if (pointer.x < (this.scene.player.body.x - this.scene.cameras.main.scrollX)) {
+		else if (pointer.x < (config.width/2) ) {
 			this.scene.player.rotate_right = false;
 			this.scene.player.setVelocityX(-160);
 		}
