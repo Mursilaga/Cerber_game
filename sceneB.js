@@ -96,7 +96,7 @@ class SceneB extends Phaser.Scene {
 	animate_demons () {
 		if(this.evilstars != undefined && this.evilstars.countActive(true) > 0) {
 			this.evilstars.children.iterate(function (child) {
-				if(child.body.velocity.x >= 0)
+				if(child.body.velocity.x > 0)
 					child.anims.play('demon_fly_right', true);
 				else
 					child.anims.play('demon_fly_left', true);
