@@ -20,4 +20,10 @@ function animate_player (player)
                 player.anims.play('turn_left', true);
         }
     }
+    
+    if(player.ghost_mode)
+        player.setAlpha(0.4, 0.4, 0.4, 0.4);
+    else
+        player.setAlpha(1, 1, 1, 1);
+        
 }

@@ -1,5 +1,6 @@
 function add_interface(scene)
 {
+    scene.player.ghost_mode = false;
     scene.player.lives = null;
     scene.player.score = 0;
     scene.player.lives = scene.physics.add.staticGroup();

@@ -7,7 +7,7 @@ class SceneB extends Phaser.Scene {
     
     preload ()
     {			
-        this.load.image('BSpace', './images/SceneB_Background.png');
+        this.load.image('BSpace', './images/SceneB_Background.jpg');
         this.load.image('BPlatform', './images/platform.png');
         this.load.image('BPlatform', './images/platform.png');
         this.load.image('BPlatform2', './images/BPlatform2.png');
@@ -15,8 +15,7 @@ class SceneB extends Phaser.Scene {
         this.load.image('BPlatform4', './images/BPlatform4.png');
     
         this.load.image('star', './images/soul.png');
-    
-        this.load.image('evilstar', './images/evilstar.png');
+
         this.load.spritesheet('demon', 
             './images/demon.png',
             { frameWidth: 66, frameHeight: 62 } );
@@ -73,7 +72,7 @@ class SceneB extends Phaser.Scene {
         this.physics.add.collider(this.player, this.platforms);
         
         this.physics.add.overlap(this.player, this.stars, collectStar, null, this);
-        this.physics.add.collider(this.player, this.evilstars, hitEnemy, null, this);
+        this.enemyCollider = this.physics.add.collider(this.player, this.evilstars, hitEnemy, null, this);
     
     
         this.stars.children.iterate(function (child) {
@@ -114,6 +113,12 @@ class SceneB extends Phaser.Scene {
         this.input.on('pointerup', this.tapUp);
         animate_player(this.player);
         this.animate_demons();
+        
+        if(this.player.ghost_mode)
+            this.enemyCollider.active = false;
+        else
+            this.enemyCollider.active = true;
+        
         //this.scene.start('SceneD');
     }
     
