@@ -14,7 +14,9 @@ class SceneB extends Phaser.Scene {
         this.load.image('BPlatform3', './images/BPlatform3.png');
         this.load.image('BPlatform4', './images/BPlatform4.png');
     
-        this.load.image('star', './images/soul.png');
+        this.load.spritesheet('soul',
+            './images/soul.png',
+            { frameWidth: 48, frameHeight: 36 } );
 
         this.load.spritesheet('demon', 
             './images/demon.png',
@@ -56,8 +58,22 @@ class SceneB extends Phaser.Scene {
             repeat: -1
         });
         
+        this.anims.create({
+            key: 'soul_fly_left',
+            frames: this.anims.generateFrameNumbers('soul', { start: 0, end: 4 }),
+            frameRate: 8,
+            repeat: -1
+        });
+        
+        this.anims.create({
+            key: 'soul_fly_right',
+            frames: this.anims.generateFrameNumbers('soul', { start: 5, end: 9 }),
+            frameRate: 8,
+            repeat: -1
+        });
+        
         this.stars = this.physics.add.group({
-            key: 'star',
+            key: 'soul',
             repeat: 11,
             setXY: { x: 12, y: 0, stepX: 70 }
         });
@@ -82,6 +98,24 @@ class SceneB extends Phaser.Scene {
             child.allowGravity = false;
         });	
         
+        var star = this.stars.create(300, 50, 'soul');
+        star.setBounce(0);
+        star.setCollideWorldBounds(true);
+        star.setVelocity(0, 0);
+        star.allowGravity = false;
+        //star.setSize(24, 40, true);
+        //star.setOffset(21, 20);
+        star.anims.play('soul_fly_left', true);
+        
+        var star2 = this.stars.create(380, 50, 'soul');
+        star2.setBounce(0);
+        star2.setCollideWorldBounds(true);
+        star2.setVelocity(0, 0);
+        star2.allowGravity = false;
+        //star2.setSize(24, 40, true);
+        //star2.setOffset(21, 20);
+        star2.anims.play('soul_fly_right', true);
+        
         var evilstar = this.evilstars.create(300, 500, 'demon');
         evilstar.setBounce(0);
         evilstar.setCollideWorldBounds(true);
@@ -103,6 +137,17 @@ class SceneB extends Phaser.Scene {
         }
     }
     
+    animate_souls () {
+        if(this.stars != undefined && this.stars.countActive(true) > 0) {
+            this.stars.children.iterate(function (child) {
+                if(child.body.velocity.x > 0)
+                    child.anims.play('soul_fly_right', true);
+                else
+                    child.anims.play('soul_fly_left', true);
+            });
+        }
+    }
+    
     update (time, delta) {
         if(this.need_new_scene) {
             this.scene.start('SceneC');
@@ -113,13 +158,14 @@ class SceneB extends Phaser.Scene {
         this.input.on('pointerup', this.tapUp);
         animate_player(this.player);
         this.animate_demons();
+        this.animate_souls();
         
         if(this.player.ghost_mode)
             this.enemyCollider.active = false;
         else
             this.enemyCollider.active = true;
         
-        //this.scene.start('SceneD');
+        this.scene.start('SceneD');
     }
     
     tapDown (pointer) {

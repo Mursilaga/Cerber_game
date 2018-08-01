@@ -18,19 +18,11 @@ class SceneD extends Phaser.Scene {
         this.load.image('DPlatform5', './images/DPlatform5.png');
         
         this.load.image('ground', './images/ground.png');
-        this.load.image('star', './images/soul.png');
-        this.load.spritesheet('wolf', 
-            './images/wolf.png',
-            { frameWidth: 52, frameHeight: 32 } );
             
         this.load.spritesheet('cyborg', 
             './images/cyborg.png',
             { frameWidth: 44, frameHeight: 61 } );
-            
-        this.load.image('evilstar', './images/evilstar.png');
-        this.load.spritesheet('enemy', 
-            './images/enemy.png',
-            { frameWidth: 52, frameHeight: 32 } );
+
         this.platforms = this.physics.add.staticGroup();
         this.cursors = this.input.keyboard.createCursorKeys();
     }
@@ -56,7 +48,7 @@ class SceneD extends Phaser.Scene {
         this.cameras.main.followOffset.set(0, 0);
         
         this.stars = this.physics.add.group({
-            key: 'star',
+            key: 'soul',
             repeat: 11,
             setXY: { x: 12, y: 0, stepX: 70 }
         });
