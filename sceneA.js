@@ -11,10 +11,7 @@ class SceneA extends Phaser.Scene {
         this.tapTime = 0;
         this.player = null;
         this.stars = null;
-        this.evilstars = null;
-        this.platforms = null;
-        this.cursors = null;
-        
+        this.evilstars = null;      
         this.scoreText = null;
         this.rotate_right = true;
         this.fly = false;

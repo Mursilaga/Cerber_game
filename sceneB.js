@@ -6,13 +6,15 @@ class SceneB extends Phaser.Scene {
     }
     
     preload ()
-    {			
+    {
         this.load.image('BSpace', './images/SceneB_Background.jpg');
         this.load.image('BPlatform', './images/platform.png');
         this.load.image('BPlatform', './images/platform.png');
         this.load.image('BPlatform2', './images/BPlatform2.png');
         this.load.image('BPlatform3', './images/BPlatform3.png');
         this.load.image('BPlatform4', './images/BPlatform4.png');
+        
+        this.load.image('exit', './images/exit.png');
     
         this.load.spritesheet('soul',
             './images/soul.png',
@@ -21,13 +23,13 @@ class SceneB extends Phaser.Scene {
         this.load.spritesheet('demon', 
             './images/demon.png',
             { frameWidth: 66, frameHeight: 62 } );
-            
+        
         this.platforms = this.physics.add.staticGroup();
         this.cursors = this.input.keyboard.createCursorKeys();
     }
     
     create ()
-    {	
+    {
         this.cameras.main.setBounds(0, 0, 3200, 600);
         this.physics.world.setBounds(0, 0, 3200, 600);
         
@@ -95,6 +97,8 @@ class SceneB extends Phaser.Scene {
             child.setBounce(1);
             child.setCollideWorldBounds(true);
             child.setVelocity(Phaser.Math.Between(-200, 200), Phaser.Math.Between(-20, 20));
+            child.setSize(24, 30, true);
+            child.setOffset(12, 4);
             child.allowGravity = false;
         });	
         
@@ -106,8 +110,14 @@ class SceneB extends Phaser.Scene {
         evilstar.setSize(24, 40, true);
         evilstar.setOffset(21, 20);
         evilstar.anims.play('demon_fly_left', true);
+        
+        this.exit = this.physics.add.sprite(350, 150, 'exit');
+        this.exit.setVelocity(0, 0);
+        this.exit.allowGravity = false;
+        this.physics.add.collider(this.exit, this.platforms);
+        this.physics.add.collider(this.player, this.exit, function(){this.need_new_scene = true}, null, this);
+        
     }
-    
 
     
     update (time, delta) {

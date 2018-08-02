@@ -39,7 +39,7 @@ class SceneD extends Phaser.Scene {
         
         sceneD_set_platforms(this.platforms);
         
-        this.player = this.physics.add.sprite(500, 300, 'wolf');
+        this.player = this.physics.add.sprite(300, 300, 'wolf');
         this.player.setBounce(0);
         this.player.setCollideWorldBounds(true);
         this.player.body.setGravityY(100);
@@ -55,13 +55,12 @@ class SceneD extends Phaser.Scene {
         
         this.evilstars = this.physics.add.group();
         
-        this.scoreText = this.add.text(16, 16, 'scene D. Score: 0', { fontSize: '32px', fill: '#FFFFFF' }).setScrollFactor(0);
         this.physics.add.collider(this.stars, this.platforms);
         this.physics.add.collider(this.evilstars, this.platforms);
         this.physics.add.collider(this.player, this.platforms);
         
         this.physics.add.overlap(this.player, this.stars, collectStar, null, this);
-		this.enemyCollider = this.physics.add.collider(this.player, this.evilstars, hitEnemy, null, this);
+        this.enemyCollider = this.physics.add.collider(this.player, this.evilstars, hitEnemy, null, this);
     
         add_interface(this);
         
@@ -91,8 +90,16 @@ class SceneD extends Phaser.Scene {
             child.setBounce(1);
             child.setCollideWorldBounds(true);
             child.setVelocity(Phaser.Math.Between(-200, 200), Phaser.Math.Between(-20, 20));
+            child.setSize(24, 30, true);
+            child.setOffset(12, 4);
             child.allowGravity = false;
         });
+        
+        this.exit = this.physics.add.sprite(500, 50, 'exit');
+        this.exit.setVelocity(0, 0);
+        this.exit.allowGravity = false;
+        this.physics.add.collider(this.exit, this.platforms);
+        this.physics.add.collider(this.player, this.exit, function(){this.need_new_scene = true}, null, this);
     }
     
     update (time, delta) {

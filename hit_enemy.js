@@ -1,10 +1,10 @@
 function hitEnemy (player, evilstar) 
 {  
-	player.ghost_mode = true;
+    player.ghost_mode = true;
     this.timer = this.time.addEvent({ delay: 2500, callback: function() {
         player.ghost_mode = false;
     } });
-	
+    
     if (player.lives.countActive(true) > 0)
     {
         for (var i = 0; i < 3; i++) 
