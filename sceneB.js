@@ -94,27 +94,9 @@ class SceneB extends Phaser.Scene {
         this.stars.children.iterate(function (child) {
             child.setBounce(1);
             child.setCollideWorldBounds(true);
-            child.setVelocity(Phaser.Math.Between(-200, 200), 20);
+            child.setVelocity(Phaser.Math.Between(-200, 200), Phaser.Math.Between(-20, 20));
             child.allowGravity = false;
         });	
-        
-        var star = this.stars.create(300, 50, 'soul');
-        star.setBounce(0);
-        star.setCollideWorldBounds(true);
-        star.setVelocity(0, 0);
-        star.allowGravity = false;
-        //star.setSize(24, 40, true);
-        //star.setOffset(21, 20);
-        star.anims.play('soul_fly_left', true);
-        
-        var star2 = this.stars.create(380, 50, 'soul');
-        star2.setBounce(0);
-        star2.setCollideWorldBounds(true);
-        star2.setVelocity(0, 0);
-        star2.allowGravity = false;
-        //star2.setSize(24, 40, true);
-        //star2.setOffset(21, 20);
-        star2.anims.play('soul_fly_right', true);
         
         var evilstar = this.evilstars.create(300, 500, 'demon');
         evilstar.setBounce(0);
@@ -126,27 +108,7 @@ class SceneB extends Phaser.Scene {
         evilstar.anims.play('demon_fly_left', true);
     }
     
-    animate_demons () {
-        if(this.evilstars != undefined && this.evilstars.countActive(true) > 0) {
-            this.evilstars.children.iterate(function (child) {
-                if(child.body.velocity.x > 0)
-                    child.anims.play('demon_fly_right', true);
-                else
-                    child.anims.play('demon_fly_left', true);
-            });
-        }
-    }
-    
-    animate_souls () {
-        if(this.stars != undefined && this.stars.countActive(true) > 0) {
-            this.stars.children.iterate(function (child) {
-                if(child.body.velocity.x > 0)
-                    child.anims.play('soul_fly_right', true);
-                else
-                    child.anims.play('soul_fly_left', true);
-            });
-        }
-    }
+
     
     update (time, delta) {
         if(this.need_new_scene) {
@@ -157,15 +119,15 @@ class SceneB extends Phaser.Scene {
         this.input.on('pointerdown', this.tapDown);
         this.input.on('pointerup', this.tapUp);
         animate_player(this.player);
-        this.animate_demons();
-        this.animate_souls();
+        animate_demons(this);
+        animate_souls(this);
         
         if(this.player.ghost_mode)
             this.enemyCollider.active = false;
         else
             this.enemyCollider.active = true;
         
-        this.scene.start('SceneD');
+        //this.scene.start('SceneD');
     }
     
     tapDown (pointer) {

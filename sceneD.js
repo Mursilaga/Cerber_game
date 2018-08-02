@@ -39,7 +39,7 @@ class SceneD extends Phaser.Scene {
         
         sceneD_set_platforms(this.platforms);
         
-        this.player = this.physics.add.sprite(3300, 300, 'wolf');
+        this.player = this.physics.add.sprite(500, 300, 'wolf');
         this.player.setBounce(0);
         this.player.setCollideWorldBounds(true);
         this.player.body.setGravityY(100);
@@ -61,11 +61,11 @@ class SceneD extends Phaser.Scene {
         this.physics.add.collider(this.player, this.platforms);
         
         this.physics.add.overlap(this.player, this.stars, collectStar, null, this);
-        this.physics.add.collider(this.player, this.evilstars, hitEnemy, null, this);
+		this.enemyCollider = this.physics.add.collider(this.player, this.evilstars, hitEnemy, null, this);
     
         add_interface(this);
         
-        var evilstar = this.evilstars.create(3000, 500, 'cyborg');
+        var evilstar = this.evilstars.create(300, 500, 'cyborg');
         evilstar.setBounce(0);
         evilstar.setCollideWorldBounds(true);
         evilstar.setVelocity(Phaser.Math.Between(-100, -99), 0);
@@ -90,24 +90,12 @@ class SceneD extends Phaser.Scene {
         this.stars.children.iterate(function (child) {
             child.setBounce(1);
             child.setCollideWorldBounds(true);
-            child.setVelocity(Phaser.Math.Between(190, 200), 0);
+            child.setVelocity(Phaser.Math.Between(-200, 200), Phaser.Math.Between(-20, 20));
             child.allowGravity = false;
         });
     }
     
-    animate_demons () {
-        if(this.evilstars != undefined && this.evilstars.countActive(true) > 0) {
-            this.evilstars.children.iterate(function (child) {
-                if(child.body.velocity.x >= 0)
-                    child.anims.play('demon_fly_right', true);
-                else
-                    child.anims.play('demon_fly_left', true);
-            });
-        }
-    }
-    
-    update (time, delta)
-    {
+    update (time, delta) {
         if(this.need_new_scene) {
             this.scene.start('SceneA');
             this.need_new_scene = false;
@@ -116,7 +104,13 @@ class SceneD extends Phaser.Scene {
         this.input.on('pointerdown', this.tapDown);
         this.input.on('pointerup', this.tapUp);
         animate_player(this.player);
-        this.animate_demons();
+        animate_demons(this);
+        animate_souls(this);
+        
+        if(this.player.ghost_mode)
+            this.enemyCollider.active = false;
+        else
+            this.enemyCollider.active = true;
     }
     
     tapDown (pointer) {

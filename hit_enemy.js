@@ -1,5 +1,10 @@
 function hitEnemy (player, evilstar) 
 {  
+	player.ghost_mode = true;
+    this.timer = this.time.addEvent({ delay: 2500, callback: function() {
+        player.ghost_mode = false;
+    } });
+	
     if (player.lives.countActive(true) > 0)
     {
         for (var i = 0; i < 3; i++) 
@@ -15,15 +20,10 @@ function hitEnemy (player, evilstar)
     else
     {
         this.physics.pause();
-        player.setAlpha(1, 1, 1, 1);
+        player.ghost_mode = false;
         player.setTint(0xff0000);
         this.player.anims.play('turn_right');
         this.score = 0;
         this.need_restart = true;
     }
-    
-    player.ghost_mode = true;
-    this.timer = this.time.addEvent({ delay: 2500, callback: function() {
-        player.ghost_mode = false;
-    } });
 }
