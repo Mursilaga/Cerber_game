@@ -14,8 +14,10 @@ class SceneB extends Phaser.Scene {
         this.load.image('BPlatform3', './images/BPlatform3.png');
         this.load.image('BPlatform4', './images/BPlatform4.png');
         
-        this.load.image('exit', './images/exit.png');
-    
+        this.load.spritesheet('exit',
+            './images/exit.png',
+            { frameWidth: 188, frameHeight: 420 } );
+
         this.load.spritesheet('soul',
             './images/soul.png',
             { frameWidth: 48, frameHeight: 36 } );
@@ -74,6 +76,13 @@ class SceneB extends Phaser.Scene {
             repeat: -1
         });
         
+        this.anims.create({
+            key: 'exit_animate',
+            frames: this.anims.generateFrameNumbers('exit', { start: 0, end: 5 }),
+            frameRate: 8,
+            repeat: -1
+        });
+        
         this.stars = this.physics.add.group({
             key: 'soul',
             repeat: 11,
@@ -111,11 +120,12 @@ class SceneB extends Phaser.Scene {
         evilstar.setOffset(21, 20);
         evilstar.anims.play('demon_fly_left', true);
         
-        this.exit = this.physics.add.sprite(350, 150, 'exit');
+        this.exit = this.physics.add.sprite(550, 250, 'exit');
         this.exit.setVelocity(0, 0);
         this.exit.allowGravity = false;
         this.physics.add.collider(this.exit, this.platforms);
         this.physics.add.collider(this.player, this.exit, function(){this.need_new_scene = true}, null, this);
+        this.exit.anims.play('exit_animate', true);
         
     }
 
