@@ -23,3 +23,12 @@ function sceneB_set_platforms (platforms)
     platforms.create(1344,485, 'BPlatform4').setScale(1.5).refreshBody();
     platforms.create(2706,485, 'BPlatform4').setScale(1.5).refreshBody();
 }
+
+function sceneB_set_lava (lava) 
+{
+    lava.create(300, 500, 'lava').anims.play('lava_animate', true);
+    lava.create(332, 500, 'lava').anims.play('lava_animate', true);
+    lava.create(364, 500, 'lava').anims.play('lava_animate', true);
+    lava.create(396, 500, 'lava').anims.play('lava_animate', true);
+
+}

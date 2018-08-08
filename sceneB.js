@@ -14,9 +14,13 @@ class SceneB extends Phaser.Scene {
         this.load.image('BPlatform3', './images/BPlatform3.png');
         this.load.image('BPlatform4', './images/BPlatform4.png');
         
+        this.load.spritesheet('lava',
+            './images/lava32.png',
+            { frameWidth: 32, frameHeight: 32 } );
+        
         this.load.spritesheet('exit',
             './images/exit.png',
-            { frameWidth: 188, frameHeight: 420 } );
+            { frameWidth: 182.99, frameHeight: 420.67 } );
 
         this.load.spritesheet('soul',
             './images/soul.png',
@@ -27,6 +31,7 @@ class SceneB extends Phaser.Scene {
             { frameWidth: 66, frameHeight: 62 } );
         
         this.platforms = this.physics.add.staticGroup();
+        this.lava = this.physics.add.staticGroup();
         this.cursors = this.input.keyboard.createCursorKeys();
     }
     
@@ -38,6 +43,7 @@ class SceneB extends Phaser.Scene {
         this.add.image(1600, 300, 'BSpace');
         
         sceneB_set_platforms(this.platforms);
+        
         
         this.player = this.physics.add.sprite(100, 300, 'wolf');
         this.player.setBounce(0);
@@ -78,7 +84,7 @@ class SceneB extends Phaser.Scene {
         
         this.anims.create({
             key: 'exit_animate',
-            frames: this.anims.generateFrameNumbers('exit', { start: 0, end: 5 }),
+            frames: this.anims.generateFrameNumbers('exit', { start: 0, end: 11 }),
             frameRate: 8,
             repeat: -1
         });
@@ -127,6 +133,24 @@ class SceneB extends Phaser.Scene {
         this.physics.add.collider(this.player, this.exit, function(){this.need_new_scene = true}, null, this);
         this.exit.anims.play('exit_animate', true);
         
+        
+        this.anims.create({
+            key: 'lava_animate',
+            frames: this.anims.generateFrameNumbers('lava', { start: 0, end: 7 }),
+            frameRate: 8,
+            repeat: -1
+        });
+        sceneB_set_lava(this.lava);
+        this.lavaCollider = this.physics.add.collider(this.player, this.lava, hitEnemy, null, this);
+
+        
+    //    var triangle = new Phaser.Geom.Triangle.BuildEquilateral(400, 25, 450);
+    //    var graphics = this.add.graphics({ lineStyle: { width: 2, color: 0xaaaa00 } });
+    //           graphics.strokeTriangleShape(triangle);
+    //    var test_platform = this.platforms.create(250,388, 'BPlatform2');
+    //    test_platform.body.setGameObject(triangle);
+    //    test_platform.body.update();
+        
     }
 
     
@@ -142,10 +166,14 @@ class SceneB extends Phaser.Scene {
         animate_demons(this);
         animate_souls(this);
         
-        if(this.player.ghost_mode)
+        if(this.player.ghost_mode) {
             this.enemyCollider.active = false;
-        else
+            this.lavaCollider.active = false;
+        }
+        else {
             this.enemyCollider.active = true;
+            this.lavaCollider.active = true;
+        }
         
         //this.scene.start('SceneD');
     }
