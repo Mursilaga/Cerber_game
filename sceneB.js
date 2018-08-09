@@ -9,7 +9,6 @@ class SceneB extends Phaser.Scene {
     {
         this.load.image('BSpace', './images/SceneB_Background.jpg');
         this.load.image('BPlatform', './images/platform.png');
-        this.load.image('BPlatform', './images/platform.png');
         this.load.image('BPlatform2', './images/BPlatform2.png');
         this.load.image('BPlatform3', './images/BPlatform3.png');
         this.load.image('BPlatform4', './images/BPlatform4.png');
@@ -40,10 +39,7 @@ class SceneB extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, 3200, 600);
         this.physics.world.setBounds(0, 0, 3200, 600);
         
-        this.add.image(1600, 300, 'BSpace');
-        
-        sceneB_set_platforms(this.platforms);
-        
+        this.add.image(1600, 300, 'BSpace');        
         
         this.player = this.physics.add.sprite(100, 300, 'wolf');
         this.player.setBounce(0);
@@ -126,7 +122,7 @@ class SceneB extends Phaser.Scene {
         evilstar.setOffset(21, 20);
         evilstar.anims.play('demon_fly_left', true);
         
-        this.exit = this.physics.add.sprite(550, 250, 'exit');
+        this.exit = this.physics.add.sprite(2550, 250, 'exit');
         this.exit.setVelocity(0, 0);
         this.exit.allowGravity = false;
         this.physics.add.collider(this.exit, this.platforms);
@@ -140,9 +136,14 @@ class SceneB extends Phaser.Scene {
             frameRate: 8,
             repeat: -1
         });
+        
+        sceneB_setGround(this.platforms);
         sceneB_set_lava(this.lava);
         this.lavaCollider = this.physics.add.collider(this.player, this.lava, hitEnemy, null, this);
+        this.physics.add.collider(this.stars, this.lava);
+        this.physics.add.collider(this.evilstars, this.lava);
 
+        sceneB_set_platforms(this.platforms);
         
     //    var triangle = new Phaser.Geom.Triangle.BuildEquilateral(400, 25, 450);
     //    var graphics = this.add.graphics({ lineStyle: { width: 2, color: 0xaaaa00 } });

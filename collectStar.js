@@ -1,7 +1,6 @@
 function collectStar (player, star)
 {
     player.score += 10;
-    player.ghost_mode = false;
     this.scoreText.setText(player.score);
         
     star.disableBody(true, true);

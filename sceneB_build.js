@@ -1,11 +1,5 @@
 function sceneB_set_platforms (platforms)
 {
-    //ground
-    for(let x = 0; x <= 3200; x+=100) {
-        platforms.create(x, 600, 'BPlatform');
-    }
-    
-    //flying platforms
     platforms.create(489,388, 'BPlatform2');
     platforms.create(1145,203, 'BPlatform2');
     platforms.create(2010,297, 'BPlatform2');
@@ -26,9 +20,15 @@ function sceneB_set_platforms (platforms)
 
 function sceneB_set_lava (lava) 
 {
-    lava.create(300, 500, 'lava').anims.play('lava_animate', true);
-    lava.create(332, 500, 'lava').anims.play('lava_animate', true);
-    lava.create(364, 500, 'lava').anims.play('lava_animate', true);
-    lava.create(396, 500, 'lava').anims.play('lava_animate', true);
+    setField(lava, 'lava', 0, 3200, 584, 32);
+    
+    lava.children.iterate(function (child) {
+        child.setSize(32, 25, true).setOffset(0, 7).anims.play('lava_animate', true);
+    });	
 
+}
+
+function sceneB_setGround(platforms)
+{
+    setField(platforms, 'BPlatform', 0, 3200, 610, 100);
 }
