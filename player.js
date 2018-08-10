@@ -1,3 +1,15 @@
+function add_player (physics) 
+{
+    player = physics.add.sprite(100, 300, 'wolf');
+    player.setBounce(0);
+    player.setCollideWorldBounds(true);
+    player.body.setGravityY(100);
+    player.rotate_right = true;
+    player.setSize(40, 26, true);
+    player.setOffset(6, 6);
+    return player;
+}
+
 function animate_player (player) 
 {
     if(player.body != undefined) {

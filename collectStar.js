@@ -5,16 +5,13 @@ function collectStar (player, star)
         
     star.disableBody(true, true);
     
-    if (this.stars.countActive(true) < 7)
-    {     
-        //  A new batch of this.stars to collect
-        this.stars.children.iterate(function (child) {
-            var cx = Phaser.Math.Between(0, 800);
-            var cy = Phaser.Math.Between(0, 600);
-            child.enableBody(true, cx, cy, true, true);
-            child.setVelocity(Phaser.Math.Between(-200, 200), 20)
-        });
-    }
+    var cx = Phaser.Math.Between(player.x - 400, player.x + 400);
+    if( (x - player.x > 0) && (x - player.x < 100) )
+        x += 100;
+    else if ( (x - player.x < 0) && (x - player.x > -100) )
+        x -= 100;
+    
+    star.enableBody(true, cx, 0, true, true).setVelocity(Phaser.Math.Between(-200, 200), 20);
     
     var x = Phaser.Math.Between(player.x - 400, player.x + 400);
     if( (x - player.x > 0) && (x - player.x < 100) )

@@ -41,11 +41,7 @@ class SceneB extends Phaser.Scene {
         
         this.add.image(1600, 300, 'BSpace');        
         
-        this.player = this.physics.add.sprite(100, 300, 'wolf');
-        this.player.setBounce(0);
-        this.player.setCollideWorldBounds(true);
-        this.player.body.setGravityY(100);
-        this.player.rotate_right = true;
+        this.player = add_player(this.physics);
     
         this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
         this.cameras.main.followOffset.set(-50, 0);

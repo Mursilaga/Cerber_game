@@ -1,6 +1,6 @@
 function sceneB_set_platforms (platforms)
 {
-    platforms.create(489,388, 'BPlatform2');
+    platforms.create(489,422, 'BPlatform2');
     platforms.create(1145,203, 'BPlatform2');
     platforms.create(2010,297, 'BPlatform2');
     platforms.create(3200,292, 'BPlatform2');
@@ -31,4 +31,5 @@ function sceneB_set_lava (lava)
 function sceneB_setGround(platforms)
 {
     setField(platforms, 'BPlatform', 0, 3200, 610, 100);
+    platforms.create(273,580, 'BPlatform3');
 }

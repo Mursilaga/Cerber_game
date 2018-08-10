@@ -38,11 +38,7 @@ class SceneD extends Phaser.Scene {
         this.add.image(3699, 300, 'DSpace2');
         
         sceneD_set_platforms(this.platforms);
-        
-        this.player = this.physics.add.sprite(300, 300, 'wolf');
-        this.player.setBounce(0);
-        this.player.setCollideWorldBounds(true);
-        this.player.body.setGravityY(100);
+        this.player = add_player(this.physics);
         
         this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
         this.cameras.main.followOffset.set(0, 0);
