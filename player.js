@@ -1,6 +1,6 @@
 function add_player (physics) 
 {
-    player = physics.add.sprite(100, 300, 'wolf');
+    player = physics.add.sprite(50, 300, 'wolf');
     player.setBounce(0);
     player.setCollideWorldBounds(true);
     player.body.setGravityY(100);

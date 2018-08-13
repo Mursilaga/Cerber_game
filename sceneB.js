@@ -12,6 +12,7 @@ class SceneB extends Phaser.Scene {
         this.load.image('BPlatform2', './images/BPlatform2.png');
         this.load.image('BPlatform3', './images/BPlatform3.png');
         this.load.image('BPlatform4', './images/BPlatform4.png');
+		this.load.image('BPlatform5', './images/BPlatform5.png');
         
         this.load.spritesheet('lava',
             './images/lava32.png',
@@ -36,15 +37,18 @@ class SceneB extends Phaser.Scene {
     
     create ()
     {
-        this.cameras.main.setBounds(0, 0, 3200, 600);
-        this.physics.world.setBounds(0, 0, 3200, 600);
+        this.cameras.main.setBounds(0, 0, 12800, 600);
+        this.physics.world.setBounds(0, 0, 12800, 600);
         
-        this.add.image(1600, 300, 'BSpace');        
+        this.add.image(1600, 300, 'BSpace');
+        this.add.image(4800, 300, 'BSpace');
+        this.add.image(8000, 300, 'BSpace');
+        this.add.image(11200, 300, 'BSpace');        
         
         this.player = add_player(this.physics);
     
         this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
-        this.cameras.main.followOffset.set(-50, 0);
+        this.cameras.main.followOffset.set(0, 0);
                 
         this.anims.create({
             key: 'demon_fly_left',
@@ -118,7 +122,7 @@ class SceneB extends Phaser.Scene {
         evilstar.setOffset(21, 20);
         evilstar.anims.play('demon_fly_left', true);
         
-        this.exit = this.physics.add.sprite(2550, 250, 'exit');
+        this.exit = this.physics.add.sprite(12750, 250, 'exit');
         this.exit.setVelocity(0, 0);
         this.exit.allowGravity = false;
         this.physics.add.collider(this.exit, this.platforms);
