@@ -18,6 +18,10 @@ class SceneB extends Phaser.Scene {
             './images/lava32.png',
             { frameWidth: 32, frameHeight: 32 } );
         
+        this.load.spritesheet('meteor',
+        './images/meteor.png',
+        { frameWidth: 12, frameHeight: 32 } );
+        
         this.load.spritesheet('exit',
             './images/exit.png',
             { frameWidth: 182.99, frameHeight: 420.67 } );
@@ -137,13 +141,17 @@ class SceneB extends Phaser.Scene {
             repeat: -1
         });
         
+        create_meteors(this);
         sceneB_setGround(this.platforms);
         sceneB_set_lava(this.lava);
         this.lavaCollider = this.physics.add.collider(this.player, this.lava, hitEnemy, null, this);
+        this.meteorCollider = this.physics.add.collider(this.player, this.meteors, hitEnemy, null, this);
         this.physics.add.collider(this.stars, this.lava);
         this.physics.add.collider(this.evilstars, this.lava);
 
         sceneB_set_platforms(this.platforms);
+        
+        
         
     //    var triangle = new Phaser.Geom.Triangle.BuildEquilateral(400, 25, 450);
     //    var graphics = this.add.graphics({ lineStyle: { width: 2, color: 0xaaaa00 } });
@@ -170,13 +178,17 @@ class SceneB extends Phaser.Scene {
         if(this.player.ghost_mode) {
             this.enemyCollider.active = false;
             this.lavaCollider.active = false;
+            this.meteorCollider.active = false;
         }
         else {
             this.enemyCollider.active = true;
             this.lavaCollider.active = true;
+            this.meteorCollider.active = true;
         }
         
-        //this.scene.start('SceneD');
+        randomly_add_meteor(this);
+    
+        this.scene.start('SceneD');
     }
     
     tapDown (pointer) {

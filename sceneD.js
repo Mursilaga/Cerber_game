@@ -96,6 +96,10 @@ class SceneD extends Phaser.Scene {
         this.exit.allowGravity = false;
         this.physics.add.collider(this.exit, this.platforms);
         this.physics.add.collider(this.player, this.exit, function(){this.need_new_scene = true}, null, this);
+        
+        create_meteors(this);
+        this.meteorCollider = this.physics.add.collider(this.player, this.meteors, hitEnemy, null, this);
+        
     }
     
     update (time, delta) {
@@ -110,10 +114,18 @@ class SceneD extends Phaser.Scene {
         animate_demons(this);
         animate_souls(this);
         
-        if(this.player.ghost_mode)
+        if(this.player.ghost_mode) {
             this.enemyCollider.active = false;
-        else
+            this.meteorCollider.active = false;
+        }
+        else {
             this.enemyCollider.active = true;
+            this.meteorCollider.active = true;
+        }
+        
+        randomly_add_meteor(this);
+    
+        //this.scene.start('SceneD');
     }
     
     tapDown (pointer) {
