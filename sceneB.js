@@ -91,7 +91,7 @@ class SceneB extends Phaser.Scene {
         
         this.stars = this.physics.add.group({
             key: 'soul',
-            repeat: 11,
+            repeat: 0,
             setXY: { x: 12, y: 0, stepX: 70 }
         });
         
@@ -116,16 +116,7 @@ class SceneB extends Phaser.Scene {
             child.setOffset(12, 4);
             child.allowGravity = false;
         });	
-        
-        var evilstar = this.evilstars.create(300, 500, 'demon');
-        evilstar.setBounce(0);
-        evilstar.setCollideWorldBounds(true);
-        evilstar.setVelocity(-50, 0);
-        evilstar.allowGravity = false;
-        evilstar.setSize(24, 40, true);
-        evilstar.setOffset(21, 20);
-        evilstar.anims.play('demon_fly_left', true);
-        
+                
         this.exit = this.physics.add.sprite(12750, 250, 'exit');
         this.exit.setVelocity(0, 0);
         this.exit.allowGravity = false;
@@ -159,7 +150,7 @@ class SceneB extends Phaser.Scene {
     //    var test_platform = this.platforms.create(250,388, 'BPlatform2');
     //    test_platform.body.setGameObject(triangle);
     //    test_platform.body.update();
-        
+
     }
 
     
