@@ -11,7 +11,6 @@ function create_meteors(scene) {
 }
 
 function meteor_landing (meteor, platform) {
-    //meteor.disableBody(true, true);
     meteor.destroy();
 }
 

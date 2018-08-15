@@ -188,7 +188,7 @@ class SceneB extends Phaser.Scene {
         
         randomly_add_meteor(this);
     
-        this.scene.start('SceneD');
+        //this.scene.start('SceneD');
     }
     
     tapDown (pointer) {

@@ -1,8 +1,10 @@
+var elem = document.getElementById("canvas_parent");
+
 var config = {
     type: Phaser.AUTO,
     doubleTapDelay: 300,
-    width: 800, //screen.availWidth,
-    height: 600, //screen.availHeight,
+    width: elem.clientWidth,  //800, //screen.availWidth,
+    height: elem.clientHeight, //600, //screen.availHeight,
     physics: {
         default: 'arcade',
         arcade: {
