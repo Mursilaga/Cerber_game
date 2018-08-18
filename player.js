@@ -1,12 +1,13 @@
 function add_player (physics) 
 {
-    player = physics.add.sprite(900, 500, 'wolf');
+    player = physics.add.sprite(3700, 400, 'player');
     player.setBounce(0);
     player.setCollideWorldBounds(true);
     player.body.setGravityY(100);
+    player.setSize(66, 47, true);
+    player.setOffset(27, 33);
     player.rotate_right = true;
-    player.setSize(40, 26, true);
-    player.setOffset(6, 6);
+    player.alive = true;
     return player;
 }
 
@@ -15,21 +16,23 @@ function animate_player (player)
     if(player.body != undefined) {
         if (player.rotate_right)
         {
+            player.flipX = false;
             if(!player.body.touching.down)
                 player.anims.play('fly_right', true);
             else if (player.body.velocity.x != 0)
-                player.anims.play('right', true);
+                player.anims.play('player_run', true);
             else 
-                player.anims.play('turn_right', true);
+                player.anims.play('player_stand', true);
         }
         else
         {
+            player.flipX = true;
             if(!player.body.touching.down)
                 player.anims.play('fly_left', true);
             else if (player.body.velocity.x != 0)
-                player.anims.play('left', true);
+                player.anims.play('player_run', true);
             else 
-                player.anims.play('turn_left', true);
+                player.anims.play('player_stand', true);
         }
     }
     

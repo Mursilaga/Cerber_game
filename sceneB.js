@@ -13,7 +13,7 @@ class SceneB extends Phaser.Scene {
         this.load.image('BPlatform3', './images/BPlatform3.png');
         this.load.image('BPlatform4', './images/BPlatform4.png');
 		this.load.image('BPlatform5', './images/BPlatform5.png');
-        
+            
         this.load.spritesheet('lava',
             './images/lava32.png',
             { frameWidth: 32, frameHeight: 32 } );
@@ -142,8 +142,6 @@ class SceneB extends Phaser.Scene {
 
         sceneB_set_platforms(this.platforms);
         
-        
-        
     //    var triangle = new Phaser.Geom.Triangle.BuildEquilateral(400, 25, 450);
     //    var graphics = this.add.graphics({ lineStyle: { width: 2, color: 0xaaaa00 } });
     //           graphics.strokeTriangleShape(triangle);
@@ -162,9 +160,11 @@ class SceneB extends Phaser.Scene {
         
         this.input.on('pointerdown', this.tapDown);
         this.input.on('pointerup', this.tapUp);
-        animate_player(this.player);
+        
         animate_demons(this);
         animate_souls(this);
+        if(this.player.alive)
+            animate_player(this.player);
         
         if(this.player.ghost_mode) {
             this.enemyCollider.active = false;
@@ -177,7 +177,7 @@ class SceneB extends Phaser.Scene {
             this.meteorCollider.active = true;
         }
         
-        randomly_add_meteor(this);
+        //randomly_add_meteor(this);
     
         //this.scene.start('SceneD');
     }

@@ -25,6 +25,10 @@ class SceneA extends Phaser.Scene {
         this.load.spritesheet('wolf', 
             './images/wolf.png',
             { frameWidth: 52, frameHeight: 32 } );
+        this.load.spritesheet('player', 
+            './images/sobaka.png',
+            { frameWidth: 120, frameHeight: 80 } );
+            
         this.load.image('interface', './images/interface.png');
         this.load.image('interface_life', './images/interface_life.png');
         this.load.image('interface_score', './images/interface_score.png');
@@ -72,6 +76,27 @@ class SceneA extends Phaser.Scene {
             key: 'fly_right',
             frames: [ { key: 'wolf', frame: 8 } ],
             frameRate: 20
+        });
+        
+        this.anims.create({
+            key: 'player_stand',
+            frames: this.anims.generateFrameNumbers('player', { start: 0, end: 5 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        
+        this.anims.create({
+            key: 'player_run',
+            frames: this.anims.generateFrameNumbers('player', { start: 6, end: 11 }),
+            frameRate: 5,
+            repeat: -1
+        });
+        
+        this.anims.create({
+            key: 'player_dies',
+            frames: this.anims.generateFrameNumbers('player', { start: 12, end: 17 }),
+            frameRate: 5,
+            repeat: 0
         });
     }
     

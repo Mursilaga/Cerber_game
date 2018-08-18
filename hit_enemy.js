@@ -20,9 +20,10 @@ function hitEnemy (player, evilstar)
     else
     {
         this.physics.pause();
+        player.alive = false;
         player.ghost_mode = false;
-        player.setTint(0xff0000);
-        this.player.anims.play('turn_right');
+        //player.setTint(0xff0000);
+        this.player.anims.play('player_dies');
         this.score = 0;
         this.need_restart = true;
     }

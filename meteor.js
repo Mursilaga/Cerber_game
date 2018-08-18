@@ -20,19 +20,17 @@ function add_meteor(scene) {
     //missile.setVelocity(0, 100);
     missile.setSize(10, 10, true);
     missile.setGravity(0, -200);
-	missile.setOrigin(0.5, 0.8);
+    missile.setOrigin(0.5, 0.8);
     missile.anims.play('meteor_fly', true);
-	if(missile.body.velocity.x != 0) {
-		let rot = Math.atan(missile.body.velocity.y / missile.body.velocity.x)
-		if(rot < 0)
-			missile.setRotation(rot + 1.57);
-		else
-			missile.setRotation(rot - 1.57);
-		
-		
-	}
-	else 
-		missile.setRotation(0);
+    if(missile.body.velocity.x != 0) {
+        let rot = Math.atan(missile.body.velocity.y / missile.body.velocity.x)
+        if(rot < 0)
+            missile.setRotation(rot + 1.57);
+        else
+            missile.setRotation(rot - 1.57);
+    }
+    else 
+        missile.setRotation(0);
 }
 
 function randomly_add_meteor(scene) {
