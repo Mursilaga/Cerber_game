@@ -18,7 +18,7 @@ function animate_player (player)
         {
             player.flipX = false;
             if(!player.body.touching.down)
-                player.anims.play('fly_right', true);
+                player.anims.play('player_fly', true);
             else if (player.body.velocity.x != 0)
                 player.anims.play('player_run', true);
             else 
@@ -28,7 +28,7 @@ function animate_player (player)
         {
             player.flipX = true;
             if(!player.body.touching.down)
-                player.anims.play('fly_left', true);
+                player.anims.play('player_fly', true);
             else if (player.body.velocity.x != 0)
                 player.anims.play('player_run', true);
             else 

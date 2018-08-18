@@ -22,9 +22,6 @@ class SceneA extends Phaser.Scene {
     {
         this.load.image('ASpace', './images/background.jpg');
         
-        this.load.spritesheet('wolf', 
-            './images/wolf.png',
-            { frameWidth: 52, frameHeight: 32 } );
         this.load.spritesheet('player', 
             './images/sobaka.png',
             { frameWidth: 120, frameHeight: 80 } );
@@ -39,44 +36,6 @@ class SceneA extends Phaser.Scene {
     {
         this.background = this.add.image(400, 300, 'ASpace');
         this.sceneText = this.add.text(300, 200, 'Scene A', { fontSize: '60px', fill: '#FFFFFF' });
-        
-        this.anims.create({
-            key: 'left',
-            frames: this.anims.generateFrameNumbers('wolf', { start: 0, end: 4 }),
-            frameRate: 10,
-            repeat: -1
-        });
-    
-        this.anims.create({
-            key: 'right',
-            frames: this.anims.generateFrameNumbers('wolf', { start: 6, end: 10 }),
-            frameRate: 10,
-            repeat: -1
-        });
-        
-        this.anims.create({
-            key: 'turn_right',
-            frames: [ { key: 'wolf', frame: 6 } ],
-            frameRate: 20
-        });
-        
-        this.anims.create({
-            key: 'turn_left',
-            frames: [ { key: 'wolf', frame: 4 } ],
-            frameRate: 20
-        });
-        
-        this.anims.create({
-            key: 'fly_left',
-            frames: [ { key: 'wolf', frame: 2 } ],
-            frameRate: 20
-        });
-        
-        this.anims.create({
-            key: 'fly_right',
-            frames: [ { key: 'wolf', frame: 8 } ],
-            frameRate: 20
-        });
         
         this.anims.create({
             key: 'player_stand',
@@ -96,6 +55,13 @@ class SceneA extends Phaser.Scene {
             key: 'player_dies',
             frames: this.anims.generateFrameNumbers('player', { start: 12, end: 17 }),
             frameRate: 5,
+            repeat: 0
+        });
+        
+        this.anims.create({
+            key: 'player_fly',
+            frames: this.anims.generateFrameNumbers('player', { start: 18, end: 18 }),
+            frameRate: 0,
             repeat: 0
         });
     }
