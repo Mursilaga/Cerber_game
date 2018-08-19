@@ -104,15 +104,17 @@ class SceneD extends Phaser.Scene {
     
     update (time, delta) {
         if(this.need_new_scene) {
-            this.scene.start('SceneA');
+            this.scene.start('SceneC');
             this.need_new_scene = false;
         }
         
         this.input.on('pointerdown', this.tapDown);
         this.input.on('pointerup', this.tapUp);
-        animate_player(this.player);
+        
         animate_demons(this);
         animate_souls(this);
+        if(this.player.alive)
+            animate_player(this.player);
         
         if(this.player.ghost_mode) {
             this.enemyCollider.active = false;
@@ -125,31 +127,14 @@ class SceneD extends Phaser.Scene {
         
         randomly_add_meteor(this);
     
-        //this.scene.start('SceneD');
+        //this.scene.start('SceneA');
     }
     
     tapDown (pointer) {
-        if(pointer.x > (config.width/2) ) {
-            this.scene.player.rotate_right = true;
-            this.scene.player.setVelocityX(160);
-        }
-        else if (pointer.x < (config.width/2) ) {
-            this.scene.player.rotate_right = false;
-            this.scene.player.setVelocityX(-160);
-        }
-        
-        if(this.scene.need_restart) {
-            this.scene.need_restart = false;
-            this.scene.scene.restart();
-        }
+		clickDown(this.scene, pointer);
     }
     
     tapUp (pointer) {
-        if( pointer.upTime - pointer.downTime < config.doubleTapDelay 
-        && this.scene.player.body.touching.down) {
-            this.scene.player.setVelocityY(-330);
-        }
-            this.scene.tapTime = pointer.downTime;
-            this.scene.player.setVelocityX(0);
+		clickUp(this.scene, pointer);
     }
 }
