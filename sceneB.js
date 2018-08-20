@@ -153,11 +153,7 @@ class SceneB extends Phaser.Scene {
 
     
     update (time, delta) {
-        if(this.need_new_scene) {
-            this.scene.start(getNextScene(this));
-            this.need_new_scene = false;
-        }
-        
+        startNewSceneIfNeed(this);
         this.input.on('pointerdown', this.tapDown);
         this.input.on('pointerup', this.tapUp);
         
@@ -166,16 +162,7 @@ class SceneB extends Phaser.Scene {
         if(this.player.alive)
             animate_player(this.player);
         
-        if(this.player.ghost_mode) {
-            this.enemyCollider.active = false;
-            this.lavaCollider.active = false;
-            this.meteorCollider.active = false;
-        }
-        else {
-            this.enemyCollider.active = true;
-            this.lavaCollider.active = true;
-            this.meteorCollider.active = true;
-        }
+        managePlayerColliders(this);
         
         randomly_add_meteor(this);
         //this.scene.start('SceneD');

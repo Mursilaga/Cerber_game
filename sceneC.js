@@ -20,12 +20,8 @@ class SceneC extends Phaser.Scene {
     
     update (time, delta)
     {
+        startNewSceneIfNeed(this);
         this.input.on('pointerdown', this.tapDown);
-        
-        if(this.need_new_scene) {
-            this.scene.start(getNextScene(this));
-            this.need_new_scene = false;
-        }
     }
     
     tapDown (pointer) 
