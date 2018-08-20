@@ -1,6 +1,6 @@
 function add_player (physics) 
 {
-    player = physics.add.sprite(3700, 400, 'player');
+    player = physics.add.sprite(300, 200, 'player');
     player.setBounce(0);
     player.setCollideWorldBounds(true);
     player.body.setGravityY(100);

@@ -91,7 +91,7 @@ class SceneB extends Phaser.Scene {
         
         this.stars = this.physics.add.group({
             key: 'soul',
-            repeat: 0,
+            repeat: 12,
             setXY: { x: 12, y: 0, stepX: 70 }
         });
         
@@ -154,7 +154,7 @@ class SceneB extends Phaser.Scene {
     
     update (time, delta) {
         if(this.need_new_scene) {
-            this.scene.start('SceneC');
+            this.scene.start(getNextScene(this));
             this.need_new_scene = false;
         }
         
@@ -177,9 +177,8 @@ class SceneB extends Phaser.Scene {
             this.meteorCollider.active = true;
         }
         
-        //randomly_add_meteor(this);
-    
-        this.scene.start('SceneD');
+        randomly_add_meteor(this);
+        //this.scene.start('SceneD');
     }
     
     tapDown (pointer) {

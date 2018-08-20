@@ -104,7 +104,7 @@ class SceneD extends Phaser.Scene {
     
     update (time, delta) {
         if(this.need_new_scene) {
-            this.scene.start('SceneC');
+            this.scene.start(getNextScene(this));
             this.need_new_scene = false;
         }
         
@@ -126,8 +126,6 @@ class SceneD extends Phaser.Scene {
         }
         
         randomly_add_meteor(this);
-    
-        //this.scene.start('SceneA');
     }
     
     tapDown (pointer) {

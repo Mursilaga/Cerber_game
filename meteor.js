@@ -34,6 +34,6 @@ function add_meteor(scene) {
 }
 
 function randomly_add_meteor(scene) {
-    if(Phaser.Math.Between(0, 100) < 5) 
+    if(Phaser.Math.Between(0, 100) < 1) 
         add_meteor(scene);
 }

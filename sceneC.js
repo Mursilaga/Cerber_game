@@ -5,7 +5,6 @@ class SceneC extends Phaser.Scene {
         super('SceneC');
     
         this.background;
-        this.clicked = false;
     }
     
     preload ()
@@ -23,14 +22,14 @@ class SceneC extends Phaser.Scene {
     {
         this.input.on('pointerdown', this.tapDown);
         
-        if(this.clicked) {
-            this.scene.start('SceneD');
-            this.clicked = false;
+        if(this.need_new_scene) {
+            this.scene.start(getNextScene(this));
+            this.need_new_scene = false;
         }
     }
     
     tapDown (pointer) 
     {
-        this.scene.clicked = true;
+        this.scene.need_new_scene = true;
     }
 }

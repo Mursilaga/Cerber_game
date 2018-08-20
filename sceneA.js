@@ -72,7 +72,7 @@ class SceneA extends Phaser.Scene {
         
         if(this.need_new_scene) {
             this.need_new_scene = false;
-            this.scene.start('SceneB');
+            this.scene.start(getNextScene(this));
         }
     }
     
