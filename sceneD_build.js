@@ -1,10 +1,9 @@
-function sceneD_set_platforms (platforms)
-{
-    //ground
-    for(let x = 0; x <= 4228; x+=100) {
-        platforms.create(x, 600, 'DPlatform1');
-    }
-    
+function sceneDBuildMap(scene) {
+    sceneD_setGround(scene.platforms, scene.physics.world);
+    sceneD_set_platforms(scene.platforms, scene.physics.world);
+}
+
+function sceneD_set_platforms (platforms, world) { 
     //flying platforms
     platforms.create(1470,215, 'DPlatform1');
     platforms.create(2564,212, 'DPlatform1');
@@ -21,4 +20,8 @@ function sceneD_set_platforms (platforms)
     //platforms.create(2400,231, 'DPlatform3');
     //platforms.create(2931,129, 'DPlatform3');
     //platforms.create(3380,461, 'DPlatform3');
+}
+
+function sceneD_setGround(platforms, world) {
+    setField(platforms, 'DPlatform1', 0, world.bounds.width, world.bounds.height+10, 100);
 }

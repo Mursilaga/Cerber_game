@@ -41,8 +41,8 @@ class SceneB extends Phaser.Scene {
     
     create ()
     {
-        this.cameras.main.setBounds(0, 0, 12800, 600);
-        this.physics.world.setBounds(0, 0, 12800, 600);
+        this.cameras.main.setBounds(0, 0, 12800, 2600);
+        this.physics.world.setBounds(0, 0, 12800, 2600);
         
         this.add.image(1600, 300, 'BSpace');
         this.add.image(4800, 300, 'BSpace');
@@ -133,22 +133,13 @@ class SceneB extends Phaser.Scene {
         });
         
         create_meteors(this);
-        sceneB_setGround(this.platforms);
-        sceneB_set_lava(this.lava);
+
         this.lavaCollider = this.physics.add.collider(this.player, this.lava, hitEnemy, null, this);
         this.meteorCollider = this.physics.add.collider(this.player, this.meteors, hitEnemy, null, this);
         this.physics.add.collider(this.stars, this.lava);
         this.physics.add.collider(this.evilstars, this.lava);
 
-        sceneB_set_platforms(this.platforms);
-        
-    //    var triangle = new Phaser.Geom.Triangle.BuildEquilateral(400, 25, 450);
-    //    var graphics = this.add.graphics({ lineStyle: { width: 2, color: 0xaaaa00 } });
-    //           graphics.strokeTriangleShape(triangle);
-    //    var test_platform = this.platforms.create(250,388, 'BPlatform2');
-    //    test_platform.body.setGameObject(triangle);
-    //    test_platform.body.update();
-
+        sceneBBuildMap(this);
     }
 
     

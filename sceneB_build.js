@@ -1,3 +1,9 @@
+function sceneBBuildMap(scene) {
+    sceneB_setGround(scene.platforms, scene.physics.world);
+    sceneB_set_lava(scene.lava, scene.physics.world);
+    sceneB_set_platforms(scene.platforms);
+}
+
 function sceneB_set_platforms (platforms)
 {
     //platforms.create(489,422, 'BPlatform2');//.setScale(1.5).refreshBody();
@@ -45,9 +51,9 @@ function sceneB_set_platforms (platforms)
 	
 }
 
-function sceneB_set_lava (lava) 
+function sceneB_set_lava (lava, world) 
 {
-    setField(lava, 'lava', 0, 2900, 584, 32);
+    setField(lava, 'lava', 0, world.bounds.width, world.bounds.height - 16, 32);
     
     lava.children.iterate(function (child) {
         child.setSize(32, 25, true).setOffset(0, 7).anims.play('lava_animate', true);
@@ -55,9 +61,9 @@ function sceneB_set_lava (lava)
 
 }
 
-function sceneB_setGround(platforms)
+function sceneB_setGround(platforms, world)
 {
-    setField(platforms, 'BPlatform', 0, 12800, 610, 100);
+    setField(platforms, 'BPlatform', 0, world.bounds.width, world.bounds.height+10, 100);
     platforms.create(273,580, 'BPlatform3');
 	platforms.create(759,580, 'BPlatform3');
 	platforms.create(1341,580, 'BPlatform3');
