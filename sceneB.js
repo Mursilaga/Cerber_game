@@ -41,15 +41,15 @@ class SceneB extends Phaser.Scene {
     
     create ()
     {
-        this.cameras.main.setBounds(0, 0, 12800, 2600);
-        this.physics.world.setBounds(0, 0, 12800, 2600);
+        this.cameras.main.setBounds(0, 0, 12800, 2160);
+        this.physics.world.setBounds(0, 0, 12800, 2160);
         
-        this.add.image(1600, 300, 'BSpace');
-        this.add.image(4800, 300, 'BSpace');
-        this.add.image(8000, 300, 'BSpace');
-        this.add.image(11200, 300, 'BSpace');        
+    //    this.add.image(1600, 300, 'BSpace').setScrollFactor(1,0);
+    //    this.add.image(4800, 300, 'BSpace').setScrollFactor(1,0);
+    //    this.add.image(8000, 300, 'BSpace').setScrollFactor(1,0);
+    //    this.add.image(11200, 300, 'BSpace').setScrollFactor(1,0);        
         
-        this.player = add_player(this.physics);
+        this.player = add_player(this.physics, 300, 1760);
     
         this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
         this.cameras.main.followOffset.set(0, 0);
@@ -92,7 +92,7 @@ class SceneB extends Phaser.Scene {
         this.stars = this.physics.add.group({
             key: 'soul',
             repeat: 12,
-            setXY: { x: 12, y: 0, stepX: 70 }
+            setXY: { x: 12, y: 1560, stepX: 70 }
         });
         
         

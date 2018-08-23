@@ -38,7 +38,7 @@ class SceneD extends Phaser.Scene {
         this.add.image(3699, 300, 'DSpace2');
         
         sceneDBuildMap(this);
-        this.player = add_player(this.physics);
+        this.player = add_player(this.physics, 300, 200);
         
         this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
         this.cameras.main.followOffset.set(0, 0);
