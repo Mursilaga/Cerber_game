@@ -43,22 +43,17 @@ class SceneD extends Phaser.Scene {
         this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
         this.cameras.main.followOffset.set(0, 0);
         
-        this.stars = this.physics.add.group({
-            key: 'soul',
-            repeat: 11,
-            setXY: { x: 12, y: 0, stepX: 70 }
-        });
-        
         this.evilstars = this.physics.add.group();
+        createLoot(this);
+        add_interface(this);
+        create_meteors(this);
         
-        this.physics.add.collider(this.stars, this.platforms);
+        this.physics.add.collider(this.loot, this.platforms);
         this.physics.add.collider(this.evilstars, this.platforms);
         this.physics.add.collider(this.player, this.platforms);
         
-        this.physics.add.overlap(this.player, this.stars, collectStar, null, this);
+        this.physics.add.overlap(this.player, this.loot, collectLoot, null, this);
         this.enemyCollider = this.physics.add.collider(this.player, this.evilstars, hitEnemy, null, this);
-    
-        add_interface(this);
         
         var evilstar = this.evilstars.create(300, 500, 'cyborg');
         evilstar.setBounce(0);
@@ -82,14 +77,6 @@ class SceneD extends Phaser.Scene {
         
         evilstar.anims.play('robot_left', true);
         
-        this.stars.children.iterate(function (child) {
-            child.setBounce(1);
-            child.setCollideWorldBounds(true);
-            child.setVelocity(Phaser.Math.Between(-200, 200), Phaser.Math.Between(-20, 20));
-            child.setSize(24, 30, true);
-            child.setOffset(12, 4);
-            child.allowGravity = false;
-        });
         
         this.exit = this.physics.add.sprite(500, 50, 'exit');
         this.exit.setVelocity(0, 0);
@@ -97,7 +84,6 @@ class SceneD extends Phaser.Scene {
         this.physics.add.collider(this.exit, this.platforms);
         this.physics.add.collider(this.player, this.exit, function(){this.need_new_scene = true}, null, this);
         
-        create_meteors(this);
         this.meteorCollider = this.physics.add.collider(this.player, this.meteors, hitEnemy, null, this);
         
     }
@@ -109,20 +95,11 @@ class SceneD extends Phaser.Scene {
         this.input.on('pointerup', this.tapUp);
         
         animate_demons(this);
-        animate_souls(this);
+        animateSouls(this);
         if(this.player.alive)
             animate_player(this.player);
         
-        managePlayerColliders(this);
-    //    if(this.player.ghost_mode) {
-    //        this.enemyCollider.active = false;
-    //        this.meteorCollider.active = false;
-    //    }
-    //    else {
-    //        this.enemyCollider.active = true;
-    //        this.meteorCollider.active = true;
-    //    }
-        
+        managePlayerColliders(this);      
         randomly_add_meteor(this);
     }
     

@@ -12,7 +12,7 @@ class SceneB extends Phaser.Scene {
         this.load.image('BPlatform2', './images/BPlatform2.png');
         this.load.image('BPlatform3', './images/BPlatform3.png');
         this.load.image('BPlatform4', './images/BPlatform4.png');
-		this.load.image('BPlatform5', './images/BPlatform5.png');
+        this.load.image('BPlatform5', './images/BPlatform5.png');
             
         this.load.spritesheet('lava',
             './images/lava32.png',
@@ -68,53 +68,24 @@ class SceneB extends Phaser.Scene {
         });
         
         this.anims.create({
-            key: 'soul_fly_left',
-            frames: this.anims.generateFrameNumbers('soul', { start: 0, end: 4 }),
-            frameRate: 8,
-            repeat: -1
-        });
-        
-        this.anims.create({
-            key: 'soul_fly_right',
-            frames: this.anims.generateFrameNumbers('soul', { start: 5, end: 9 }),
-            frameRate: 8,
-            repeat: -1
-        });
-        
-        this.anims.create({
             key: 'exit_animate',
             frames: this.anims.generateFrameNumbers('exit', { start: 0, end: 11 }),
             frameRate: 8,
             repeat: -1
-        });
-        
-        this.stars = this.physics.add.group({
-            key: 'soul',
-            repeat: 12,
-            setXY: { x: 12, y: 1560, stepX: 70 }
-        });
-        
+        });      
         
         this.evilstars = this.physics.add.group();
-        
+        createLoot(this);
+        create_meteors(this);
+        sceneBBuildMap(this);
         add_interface(this);
         
-        this.physics.add.collider(this.stars, this.platforms);
+        this.physics.add.collider(this.loot, this.platforms);
         this.physics.add.collider(this.evilstars, this.platforms);
         this.physics.add.collider(this.player, this.platforms);
         
-        this.physics.add.overlap(this.player, this.stars, collectStar, null, this);
+        this.physics.add.overlap(this.player, this.loot, collectLoot, null, this);
         this.enemyCollider = this.physics.add.collider(this.player, this.evilstars, hitEnemy, null, this);
-    
-    
-        this.stars.children.iterate(function (child) {
-            child.setBounce(1);
-            child.setCollideWorldBounds(true);
-            child.setVelocity(Phaser.Math.Between(-200, 200), Phaser.Math.Between(-20, 20));
-            child.setSize(24, 30, true);
-            child.setOffset(12, 4);
-            child.allowGravity = false;
-        });	
                 
         this.exit = this.physics.add.sprite(12750, 250, 'exit');
         this.exit.setVelocity(0, 0);
@@ -123,22 +94,10 @@ class SceneB extends Phaser.Scene {
         this.physics.add.collider(this.player, this.exit, function(){this.need_new_scene = true}, null, this);
         this.exit.anims.play('exit_animate', true);
         
-        
-        this.anims.create({
-            key: 'lava_animate',
-            frames: this.anims.generateFrameNumbers('lava', { start: 0, end: 7 }),
-            frameRate: 8,
-            repeat: -1
-        });
-        
-        create_meteors(this);
-
         this.lavaCollider = this.physics.add.collider(this.player, this.lava, hitEnemy, null, this);
         this.meteorCollider = this.physics.add.collider(this.player, this.meteors, hitEnemy, null, this);
-        this.physics.add.collider(this.stars, this.lava);
+        this.physics.add.collider(this.loot, this.lava);
         this.physics.add.collider(this.evilstars, this.lava);
-
-        sceneBBuildMap(this);
     }
 
     
@@ -148,7 +107,7 @@ class SceneB extends Phaser.Scene {
         this.input.on('pointerup', this.tapUp);
         
         animate_demons(this);
-        animate_souls(this);
+        animateSouls(this);
         if(this.player.alive)
             animate_player(this.player);
         
@@ -159,10 +118,10 @@ class SceneB extends Phaser.Scene {
     }
     
     tapDown (pointer) {
-		clickDown(this.scene, pointer);
+        clickDown(this.scene, pointer);
     }
     
     tapUp (pointer) {
-		clickUp(this.scene, pointer);
+        clickUp(this.scene, pointer);
     }
 }
