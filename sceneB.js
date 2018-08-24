@@ -35,7 +35,6 @@ class SceneB extends Phaser.Scene {
             { frameWidth: 66, frameHeight: 62 } );
         
         this.platforms = this.physics.add.staticGroup();
-        this.lava = this.physics.add.staticGroup();
         this.cursors = this.input.keyboard.createCursorKeys();
     }
     

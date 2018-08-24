@@ -1,7 +1,7 @@
 function sceneBBuildMap(scene) {
     sceneB_setGround(scene.platforms, scene.physics.world);
     sceneB_set_platforms(scene.platforms);
-    sceneB_set_lava(scene.lava, scene.physics.world);
+    sceneB_set_lava(scene);
 }
 
 function sceneB_set_platforms (platforms)
@@ -64,11 +64,19 @@ function sceneB_set_platforms (platforms)
 
 }
 
-function sceneB_set_lava (lava, world) 
+function sceneB_set_lava (scene) 
 {
-    setField(lava, 'lava', 0, world.bounds.width, world.bounds.height - 16, 32);
+    scene.anims.create({
+        key: 'lava_animate',
+        frames: scene.anims.generateFrameNumbers('lava', { start: 0, end: 7 }),
+        frameRate: 8,
+        repeat: -1
+    });
+        
+    scene.lava = scene.physics.add.staticGroup();
+    setField(scene.lava, 'lava', 0, scene.physics.world.bounds.width, scene.physics.world.bounds.height - 16, 32);
     
-    lava.children.iterate(function (child) {
+    scene.lava.children.iterate(function (child) {
         child.setSize(32, 25, true).setOffset(0, 7).anims.play('lava_animate', true);
     });	
 
