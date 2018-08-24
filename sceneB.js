@@ -67,17 +67,11 @@ class SceneB extends Phaser.Scene {
             repeat: -1
         });
         
-        this.anims.create({
-            key: 'exit_animate',
-            frames: this.anims.generateFrameNumbers('exit', { start: 0, end: 11 }),
-            frameRate: 8,
-            repeat: -1
-        });      
-        
         this.evilstars = this.physics.add.group();
         createLoot(this);
         create_meteors(this);
         sceneBBuildMap(this);
+        createExit(this, 12750, 250);
         add_interface(this);
         
         this.physics.add.collider(this.loot, this.platforms);
@@ -86,14 +80,7 @@ class SceneB extends Phaser.Scene {
         
         this.physics.add.overlap(this.player, this.loot, collectLoot, null, this);
         this.enemyCollider = this.physics.add.collider(this.player, this.evilstars, hitEnemy, null, this);
-                
-        this.exit = this.physics.add.sprite(12750, 250, 'exit');
-        this.exit.setVelocity(0, 0);
-        this.exit.allowGravity = false;
-        this.physics.add.collider(this.exit, this.platforms);
-        this.physics.add.collider(this.player, this.exit, function(){this.need_new_scene = true}, null, this);
-        this.exit.anims.play('exit_animate', true);
-        
+                       
         this.lavaCollider = this.physics.add.collider(this.player, this.lava, hitEnemy, null, this);
         this.meteorCollider = this.physics.add.collider(this.player, this.meteors, hitEnemy, null, this);
         this.physics.add.collider(this.loot, this.lava);

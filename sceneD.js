@@ -47,6 +47,7 @@ class SceneD extends Phaser.Scene {
         createLoot(this);
         add_interface(this);
         create_meteors(this);
+        createExit(this, 500, 50);
         
         this.physics.add.collider(this.loot, this.platforms);
         this.physics.add.collider(this.evilstars, this.platforms);
@@ -76,13 +77,6 @@ class SceneD extends Phaser.Scene {
         });
         
         evilstar.anims.play('robot_left', true);
-        
-        
-        this.exit = this.physics.add.sprite(500, 50, 'exit');
-        this.exit.setVelocity(0, 0);
-        this.exit.allowGravity = false;
-        this.physics.add.collider(this.exit, this.platforms);
-        this.physics.add.collider(this.player, this.exit, function(){this.need_new_scene = true}, null, this);
         
         this.meteorCollider = this.physics.add.collider(this.player, this.meteors, hitEnemy, null, this);
         
