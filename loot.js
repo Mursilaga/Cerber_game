@@ -53,7 +53,7 @@ function collectLoot (player, loot)
     else if ( (x - player.x < 0) && (x - player.x > -100) )
         x -= 100;
     
-    loot.enableBody(true, cx, 0, true, true).setVelocity(Phaser.Math.Between(-200, 200), 20);
+    loot.enableBody(true, cx, player.y - 400, true, true).setVelocity(Phaser.Math.Between(-200, 200), 20);
     
     var x = Phaser.Math.Between(player.x - 400, player.x + 400);
     if( (x - player.x > 0) && (x - player.x < 100) )
@@ -61,7 +61,7 @@ function collectLoot (player, loot)
     else if ( (x - player.x < 0) && (x - player.x > -100) )
         x -= 100;
     
-    var evilstar = this.evilstars.create(x, 0, 'demon');
+    var evilstar = this.evilstars.create(x, player.y - 400, 'demon');
     evilstar.setBounce(1);
     evilstar.setCollideWorldBounds(true);
     evilstar.setVelocity(Phaser.Math.Between(-200, 200), 20);

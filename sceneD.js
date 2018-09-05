@@ -98,10 +98,10 @@ class SceneD extends Phaser.Scene {
     }
     
     tapDown (pointer) {
-		clickDown(this.scene, pointer);
+        clickDown(this.scene, pointer);
     }
     
     tapUp (pointer) {
-		clickUp(this.scene, pointer);
+        clickUp(this.scene, pointer);
     }
 }
