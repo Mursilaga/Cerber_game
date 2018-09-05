@@ -43,16 +43,15 @@ class SceneB extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, 4800, 600);
         this.physics.world.setBounds(0, 0, 4800, 600);
         
-    //    this.add.image(1600, 300, 'BSpace').setScrollFactor(1,0);
-    //    this.add.image(4800, 300, 'BSpace').setScrollFactor(1,0);
-    //    this.add.image(8000, 300, 'BSpace').setScrollFactor(1,0);
-    //    this.add.image(11200, 300, 'BSpace').setScrollFactor(1,0);        
+        this.add.image(1600, 300, 'BSpace').setScrollFactor(1,0);
+        this.add.image(4800, 300, 'BSpace').setScrollFactor(1,0);
+        this.add.image(8000, 300, 'BSpace').setScrollFactor(1,0);
+        this.add.image(11200, 300, 'BSpace').setScrollFactor(1,0);
         
         this.player = add_player(this.physics, 300, 360);
-    
         this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
         this.cameras.main.followOffset.set(0, 0);
-                
+        
         this.anims.create({
             key: 'demon_fly_left',
             frames: this.anims.generateFrameNumbers('demon', { start: 0, end: 5 }),

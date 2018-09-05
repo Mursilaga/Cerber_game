@@ -1,14 +1,11 @@
 function sceneBBuildMap(scene) {
-    sceneB_setGround(scene.platforms, scene.physics.world);
-    sceneB_set_platforms(scene.platforms, scene.physics.world.bounds.height);
-    sceneB_set_lava(scene);
+    sceneBSetGround(scene.platforms, scene.physics.world);
+    sceneBSetPlatforms(scene.platforms, scene.physics.world.bounds.height);
+    setPlatformCollision(scene.platforms);
+    sceneBSetLava(scene);
 }
 
-function sceneB_set_platforms (platforms, y_max)
-{
-    //platforms.create(489,422, 'BPlatform2');//.setScale(1.5).refreshBody();
-    //platforms.create(1145,203, 'BPlatform2');//.setScale(1.5).refreshBody();
-    
+function sceneBSetPlatforms (platforms, y_max) {   
     platforms.create(310,  y_max-300, 'BPlatform2');
     platforms.create(486,  y_max-92,  'BPlatform2');
     platforms.create(557,  y_max-160, 'BPlatform2');
@@ -38,7 +35,6 @@ function sceneB_set_platforms (platforms, y_max)
     platforms.create(3739, y_max-346, 'BPlatform2');
     platforms.create(3962, y_max-300, 'BPlatform2');
     
-    //platforms.create(373,180, 'BPlatform3');
     platforms.create(218,  y_max-261, 'BPlatform3');
     platforms.create(420,  y_max-342, 'BPlatform3');
     platforms.create(654,  y_max-209, 'BPlatform3');
@@ -55,17 +51,14 @@ function sceneB_set_platforms (platforms, y_max)
     platforms.create(3594, y_max-486, 'BPlatform3');
     platforms.create(3837, y_max-382, 'BPlatform3');
     
-    //platforms.create(60,485, 'BPlatform4');//.setScale(1.5).refreshBody();
-    platforms.create(36,   y_max-93, 'BPlatform4');
-    platforms.create(843,  y_max-92, 'BPlatform4');
-    platforms.create(2585, y_max-89, 'BPlatform4');
-    platforms.create(3476, y_max-88, 'BPlatform4');
-    platforms.create(4000, y_max-90, 'BPlatform4');
-
+    platforms.create(36,   y_max-93, 'BPlatform4').name = "column";
+    platforms.create(843,  y_max-92, 'BPlatform4').name = "column";
+    platforms.create(2585, y_max-89, 'BPlatform4').name = "column";
+    platforms.create(3476, y_max-88, 'BPlatform4').name = "column";
+    platforms.create(4000, y_max-90, 'BPlatform4').name = "column";
 }
 
-function sceneB_set_lava (scene) 
-{
+function sceneBSetLava (scene)  {
     scene.anims.create({
         key: 'lava_animate',
         frames: scene.anims.generateFrameNumbers('lava', { start: 0, end: 7 }),
@@ -79,11 +72,9 @@ function sceneB_set_lava (scene)
     scene.lava.children.iterate(function (child) {
         child.setSize(32, 25, true).setOffset(0, 7).anims.play('lava_animate', true);
     });	
-
 }
 
-function sceneB_setGround(platforms, world)
-{
+function sceneBSetGround(platforms, world) {
     setField(platforms, 'BPlatform', 0, world.bounds.width, world.bounds.height+10, 100);
     platforms.create(273, world.bounds.height - 20, 'BPlatform3');
     platforms.create(759, world.bounds.height - 20, 'BPlatform3');
@@ -95,4 +86,14 @@ function sceneB_setGround(platforms, world)
     platforms.create(140, world.bounds.height - 43, 'BPlatform5');
     platforms.create(140, world.bounds.height - 43, 'BPlatform5');
     platforms.create(2473, world.bounds.height - 16, 'BPlatform5');
+}
+
+function setPlatformCollision (platforms) {
+    platforms.children.iterate(function (child) {
+        if(child.name != "column") {
+            child.body.checkCollision.down = false;
+            child.body.checkCollision.left = false;
+            child.body.checkCollision.right = false;
+        }
+    });
 }
