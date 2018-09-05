@@ -1,66 +1,66 @@
 function sceneBBuildMap(scene) {
     sceneB_setGround(scene.platforms, scene.physics.world);
-    sceneB_set_platforms(scene.platforms);
+    sceneB_set_platforms(scene.platforms, scene.physics.world.bounds.height);
     sceneB_set_lava(scene);
 }
 
-function sceneB_set_platforms (platforms)
+function sceneB_set_platforms (platforms, y_max)
 {
     //platforms.create(489,422, 'BPlatform2');//.setScale(1.5).refreshBody();
     //platforms.create(1145,203, 'BPlatform2');//.setScale(1.5).refreshBody();
-    platforms.create(310, 1860, 'BPlatform2');
-    platforms.create(486, 2068, 'BPlatform2');
-    platforms.create(557, 2000, 'BPlatform2');
-    platforms.create(744, 1885, 'BPlatform2');
-    platforms.create(982, 1860, 'BPlatform2');
-    platforms.create(1160, 2001, 'BPlatform2');
-    platforms.create(1202, 1765, 'BPlatform2');
-    platforms.create(1253, 1946, 'BPlatform2');
-    platforms.create(1343, 1893, 'BPlatform2');
-    platforms.create(1769, 1956, 'BPlatform2');
-    platforms.create(1860, 1997, 'BPlatform2');
-    platforms.create(1955, 2027, 'BPlatform2');
-    platforms.create(1989, 1788, 'BPlatform2');
-    platforms.create(2073, 1744, 'BPlatform2');
-    platforms.create(2239, 1898, 'BPlatform2'); 
-    platforms.create(2333, 1850, 'BPlatform2');
-    platforms.create(2389, 1762, 'BPlatform2');
-    platforms.create(2711, 1799, 'BPlatform2');
-    platforms.create(2735, 1971, 'BPlatform2');
-    platforms.create(2855, 1905, 'BPlatform2');
-    platforms.create(3095, 1940, 'BPlatform2');
-    platforms.create(3176, 2018, 'BPlatform2');
-    platforms.create(3275, 1808, 'BPlatform2');
-    platforms.create(3385, 1857, 'BPlatform2');
-    platforms.create(3627, 1944, 'BPlatform2');
-    platforms.create(3714, 1717, 'BPlatform2');
-    platforms.create(3739, 1814, 'BPlatform2');
-    platforms.create(3962, 1860, 'BPlatform2');
-
-    //platforms.create(373,180, 'BPlatform3');
-    platforms.create(218,1899, 'BPlatform3');
-    platforms.create(420,1818, 'BPlatform3');
-    platforms.create(654,1951, 'BPlatform3');
-    platforms.create(1076,1806, 'BPlatform3');
-    platforms.create(1331,1711, 'BPlatform3');
-    platforms.create(1471,1832, 'BPlatform3');
-    platforms.create(1661,1903, 'BPlatform3');
-    platforms.create(1880,1831, 'BPlatform3');
-    platforms.create(2132,1958, 'BPlatform3');
-    platforms.create(2201,1711, 'BPlatform3');
-    platforms.create(2252,1765, 'BPlatform3');
-    platforms.create(2982,1850, 'BPlatform3');
-    platforms.create(3164,1741, 'BPlatform3');
-    platforms.create(3594,1674, 'BPlatform3');
-    platforms.create(3837,1778, 'BPlatform3');
     
-
+    platforms.create(310,  y_max-300, 'BPlatform2');
+    platforms.create(486,  y_max-92,  'BPlatform2');
+    platforms.create(557,  y_max-160, 'BPlatform2');
+    platforms.create(744,  y_max-275, 'BPlatform2');
+    platforms.create(982,  y_max-300, 'BPlatform2');
+    platforms.create(1160, y_max-159, 'BPlatform2');
+    platforms.create(1202, y_max-395, 'BPlatform2');
+    platforms.create(1253, y_max-214, 'BPlatform2');
+    platforms.create(1343, y_max-267, 'BPlatform2');
+    platforms.create(1769, y_max-204, 'BPlatform2');
+    platforms.create(1860, y_max-163, 'BPlatform2');
+    platforms.create(1955, y_max-133, 'BPlatform2');
+    platforms.create(1989, y_max-372, 'BPlatform2');
+    platforms.create(2073, y_max-416, 'BPlatform2');
+    platforms.create(2239, y_max-262, 'BPlatform2');
+    platforms.create(2333, y_max-310, 'BPlatform2');
+    platforms.create(2389, y_max-398, 'BPlatform2');
+    platforms.create(2711, y_max-361, 'BPlatform2');
+    platforms.create(2735, y_max-189, 'BPlatform2');
+    platforms.create(2855, y_max-255, 'BPlatform2');
+    platforms.create(3095, y_max-220, 'BPlatform2');
+    platforms.create(3176, y_max-142, 'BPlatform2');
+    platforms.create(3275, y_max-352, 'BPlatform2');
+    platforms.create(3385, y_max-303, 'BPlatform2');
+    platforms.create(3627, y_max-216, 'BPlatform2');
+    platforms.create(3714, y_max-443, 'BPlatform2');
+    platforms.create(3739, y_max-346, 'BPlatform2');
+    platforms.create(3962, y_max-300, 'BPlatform2');
+    
+    //platforms.create(373,180, 'BPlatform3');
+    platforms.create(218,  y_max-261, 'BPlatform3');
+    platforms.create(420,  y_max-342, 'BPlatform3');
+    platforms.create(654,  y_max-209, 'BPlatform3');
+    platforms.create(1076, y_max-354, 'BPlatform3');
+    platforms.create(1331, y_max-449, 'BPlatform3');
+    platforms.create(1471, y_max-328, 'BPlatform3');
+    platforms.create(1661, y_max-257, 'BPlatform3');
+    platforms.create(1880, y_max-329, 'BPlatform3');
+    platforms.create(2132, y_max-202, 'BPlatform3');
+    platforms.create(2201, y_max-449, 'BPlatform3');
+    platforms.create(2252, y_max-395, 'BPlatform3');
+    platforms.create(2982, y_max-310, 'BPlatform3');
+    platforms.create(3164, y_max-419, 'BPlatform3');
+    platforms.create(3594, y_max-486, 'BPlatform3');
+    platforms.create(3837, y_max-382, 'BPlatform3');
+    
     //platforms.create(60,485, 'BPlatform4');//.setScale(1.5).refreshBody();
-    platforms.create(36,2067, 'BPlatform4');
-    platforms.create(843,2068, 'BPlatform4');
-    platforms.create(2585,2071, 'BPlatform4');
-    platforms.create(3476,2072, 'BPlatform4');
-    platforms.create(4000,2070, 'BPlatform4');
+    platforms.create(36,   y_max-93, 'BPlatform4');
+    platforms.create(843,  y_max-92, 'BPlatform4');
+    platforms.create(2585, y_max-89, 'BPlatform4');
+    platforms.create(3476, y_max-88, 'BPlatform4');
+    platforms.create(4000, y_max-90, 'BPlatform4');
 
 }
 
