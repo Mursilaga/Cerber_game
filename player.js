@@ -1,4 +1,4 @@
-function add_player (physics, x, y) 
+function addPlayer (physics, x, y) 
 {
     var player = physics.add.sprite(x, y, 'player');
     player.setBounce(0);
@@ -11,7 +11,7 @@ function add_player (physics, x, y)
     return player;
 }
 
-function animate_player (player) 
+function animatePlayer (player) 
 {
     if(player.body != undefined) {
         if (player.rotate_right)

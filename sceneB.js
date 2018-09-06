@@ -48,7 +48,7 @@ class SceneB extends Phaser.Scene {
         this.add.image(8000, 300, 'BSpace').setScrollFactor(1,0);
         this.add.image(11200, 300, 'BSpace').setScrollFactor(1,0);
         
-        this.player = add_player(this.physics, 300, 360);
+        this.player = addPlayer(this.physics, 300, 360);
         this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
         this.cameras.main.followOffset.set(0, 0);
         
@@ -68,10 +68,10 @@ class SceneB extends Phaser.Scene {
         
         this.evilstars = this.physics.add.group();
         createLoot(this);
-        create_meteors(this);
+        createMeteors(this);
         sceneBBuildMap(this);
         createExit(this, this.physics.world.bounds.width - 100, this.physics.world.bounds.height - 250);
-        add_interface(this);
+        addInterface(this);
         
         this.physics.add.collider(this.loot, this.platforms);
         this.physics.add.collider(this.evilstars, this.platforms);
@@ -92,14 +92,14 @@ class SceneB extends Phaser.Scene {
         this.input.on('pointerdown', this.tapDown);
         this.input.on('pointerup', this.tapUp);
         
-        animate_demons(this);
+        animateDemons(this);
         animateSouls(this);
         if(this.player.alive)
-            animate_player(this.player);
+            animatePlayer(this.player);
         
         managePlayerColliders(this);
         
-        //randomly_add_meteor(this);
+        //randomlyAddMeteor(this);
         //this.scene.start('SceneD');
     }
     

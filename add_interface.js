@@ -1,4 +1,4 @@
-function add_interface(scene)
+function addInterface(scene)
 {
     scene.player.ghost_mode = false;
     scene.player.lives = null;

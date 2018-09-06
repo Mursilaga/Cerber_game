@@ -1,4 +1,4 @@
-function animate_demons (scene) 
+function animateDemons (scene) 
 {
     if(scene.evilstars != undefined && scene.evilstars.countActive(true) > 0) {
         scene.evilstars.children.iterate(function (child) {

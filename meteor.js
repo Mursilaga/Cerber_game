@@ -1,4 +1,4 @@
-function create_meteors(scene) {  
+function createMeteors(scene) {  
     scene.anims.create({
         key: 'meteor_fly',
         frames: scene.anims.generateFrameNumbers('meteor', { start: 0, end: 1 }),
@@ -7,17 +7,16 @@ function create_meteors(scene) {
     });
     
     scene.meteors = scene.physics.add.group();
-    scene.physics.add.collider(scene.meteors, scene.platforms, meteor_landing, null, this);
+    scene.physics.add.collider(scene.meteors, scene.platforms, meteorLanding, null, this);
 }
 
-function meteor_landing (meteor, platform) {
+function meteorLanding (meteor, platform) {
     meteor.destroy();
 }
 
-function add_meteor(scene) {
+function addMeteor(scene) {
     var missile = scene.meteors.create(Phaser.Math.Between(scene.player.x - 400, scene.player.x + 400), 0, 'meteor');
     missile.setVelocity(Phaser.Math.Between(-200, 200), Phaser.Math.Between(50, 150));
-    //missile.setVelocity(0, 100);
     missile.setSize(10, 10, true);
     missile.setGravity(0, -200);
     missile.setOrigin(0.5, 0.8);
@@ -33,7 +32,7 @@ function add_meteor(scene) {
         missile.setRotation(0);
 }
 
-function randomly_add_meteor(scene) {
+function randomlyAddMeteor(scene) {
     if(Phaser.Math.Between(0, 100) < 1) 
-        add_meteor(scene);
+        addMeteor(scene);
 }

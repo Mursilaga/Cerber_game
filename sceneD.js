@@ -38,15 +38,15 @@ class SceneD extends Phaser.Scene {
         this.add.image(3699, 300, 'DSpace2');
         
         sceneDBuildMap(this);
-        this.player = add_player(this.physics, 300, 200);
+        this.player = addPlayer(this.physics, 300, 200);
         
         this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
         this.cameras.main.followOffset.set(0, 0);
         
         this.evilstars = this.physics.add.group();
         createLoot(this);
-        add_interface(this);
-        create_meteors(this);
+        addInterface(this);
+        createMeteors(this);
         createExit(this, 500, 50);
         
         this.physics.add.collider(this.loot, this.platforms);
@@ -88,13 +88,13 @@ class SceneD extends Phaser.Scene {
         this.input.on('pointerdown', this.tapDown);
         this.input.on('pointerup', this.tapUp);
         
-        animate_demons(this);
+        animateDemons(this);
         animateSouls(this);
         if(this.player.alive)
-            animate_player(this.player);
+            animatePlayer(this.player);
         
         managePlayerColliders(this);      
-        randomly_add_meteor(this);
+        randomlyAddMeteor(this);
     }
     
     tapDown (pointer) {
