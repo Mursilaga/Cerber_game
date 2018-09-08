@@ -24,7 +24,7 @@ class SceneB extends Phaser.Scene {
         
         this.load.spritesheet('exit',
             './images/exit.png',
-            { frameWidth: 182.99, frameHeight: 420.67 } );
+            { frameWidth: 110, frameHeight: 421 } );
 
         this.load.spritesheet('soul',
             './images/soul.png',
@@ -52,38 +52,24 @@ class SceneB extends Phaser.Scene {
         this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
         this.cameras.main.followOffset.set(0, 0);
         
-        this.anims.create({
-            key: 'demon_fly_left',
-            frames: this.anims.generateFrameNumbers('demon', { start: 0, end: 5 }),
-            frameRate: 8,
-            repeat: -1
-        });
-        
-        this.anims.create({
-            key: 'demon_fly_right',
-            frames: this.anims.generateFrameNumbers('demon', { start: 6, end: 11 }),
-            frameRate: 8,
-            repeat: -1
-        });
-        
-        this.evilstars = this.physics.add.group();
         createLoot(this);
+        createEnemies(this);
         createMeteors(this);
         sceneBBuildMap(this);
-        createExit(this, this.physics.world.bounds.width - 100, this.physics.world.bounds.height - 250);
+        createExit(this, this.physics.world.bounds.width - 3900, this.physics.world.bounds.height - 250);
         addInterface(this);
         
         this.physics.add.collider(this.loot, this.platforms);
-        this.physics.add.collider(this.evilstars, this.platforms);
+        this.physics.add.collider(this.enemies, this.platforms);
         this.physics.add.collider(this.player, this.platforms);
         
         this.physics.add.overlap(this.player, this.loot, collectLoot, null, this);
-        this.enemyCollider = this.physics.add.collider(this.player, this.evilstars, hitEnemy, null, this);
+        this.enemyCollider = this.physics.add.collider(this.player, this.enemies, hitEnemy, null, this);
                        
         this.lavaCollider = this.physics.add.collider(this.player, this.lava, hitEnemy, null, this);
         this.meteorCollider = this.physics.add.collider(this.player, this.meteors, hitEnemy, null, this);
         this.physics.add.collider(this.loot, this.lava);
-        this.physics.add.collider(this.evilstars, this.lava);
+        this.physics.add.collider(this.enemies, this.lava);
     }
 
     

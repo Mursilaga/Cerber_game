@@ -43,43 +43,42 @@ class SceneD extends Phaser.Scene {
         this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
         this.cameras.main.followOffset.set(0, 0);
         
-        this.evilstars = this.physics.add.group();
+        createEnemies(this);
         createLoot(this);
         addInterface(this);
         createMeteors(this);
         createExit(this, 500, 50);
         
         this.physics.add.collider(this.loot, this.platforms);
-        this.physics.add.collider(this.evilstars, this.platforms);
+        this.physics.add.collider(this.enemies, this.platforms);
         this.physics.add.collider(this.player, this.platforms);
         
         this.physics.add.overlap(this.player, this.loot, collectLoot, null, this);
-        this.enemyCollider = this.physics.add.collider(this.player, this.evilstars, hitEnemy, null, this);
-        
-        var evilstar = this.evilstars.create(300, 500, 'cyborg');
-        evilstar.setBounce(0);
-        evilstar.setCollideWorldBounds(true);
-        evilstar.setVelocity(Phaser.Math.Between(-100, -99), 0);
-        evilstar.body.setGravityY(100);	
-        
-        this.anims.create({
-            key: 'robot_left',
-            frames: this.anims.generateFrameNumbers('cyborg', { start: 0, end: 5 }),
-            frameRate: 4,
-            repeat: -1
-        });
-    
-        this.anims.create({
-            key: 'robot_right',
-            frames: this.anims.generateFrameNumbers('cyborg', { start: 6, end: 11 }),
-            frameRate: 4,
-            repeat: -1
-        });
-        
-        evilstar.anims.play('robot_left', true);
+        this.enemyCollider = this.physics.add.collider(this.player, this.enemies, hitEnemy, null, this);
         
         this.meteorCollider = this.physics.add.collider(this.player, this.meteors, hitEnemy, null, this);
         
+    //    var evilstar = this.enemies.create(300, 500, 'cyborg');
+    //    evilstar.setBounce(0);
+    //    evilstar.setCollideWorldBounds(true);
+    //    evilstar.setVelocity(Phaser.Math.Between(-100, -99), 0);
+    //    evilstar.body.setGravityY(100);	
+    //    
+    //    this.anims.create({
+    //        key: 'robot_left',
+    //        frames: this.anims.generateFrameNumbers('cyborg', { start: 0, end: 5 }),
+    //        frameRate: 4,
+    //        repeat: -1
+    //    });
+    //
+    //    this.anims.create({
+    //        key: 'robot_right',
+    //        frames: this.anims.generateFrameNumbers('cyborg', { start: 6, end: 11 }),
+    //        frameRate: 4,
+    //        repeat: -1
+    //    });
+    //    
+    //    evilstar.anims.play('robot_left', true);   
     }
     
     update (time, delta) {
