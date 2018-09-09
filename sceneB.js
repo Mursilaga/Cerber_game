@@ -7,7 +7,7 @@ class SceneB extends Phaser.Scene {
     
     preload ()
     {
-        this.load.image('BSpace', './images/SceneB_Background.jpg');
+        this.load.image('BSpace', './images/SceneB_Background.png');
         this.load.image('BPlatform', './images/platform.png');
         this.load.image('BPlatform2', './images/BPlatform2.png');
         this.load.image('BPlatform3', './images/BPlatform3.png');
@@ -40,13 +40,10 @@ class SceneB extends Phaser.Scene {
     
     create ()
     {
-        this.cameras.main.setBounds(0, 0, 4800, 600);
-        this.physics.world.setBounds(0, 0, 4800, 600);
+        this.cameras.main.setBounds(0, 0, 4040, 600);
+        this.physics.world.setBounds(0, 0, 4040, 600);
         
-        this.add.image(1600, 300, 'BSpace').setScrollFactor(1,0);
-        this.add.image(4800, 300, 'BSpace').setScrollFactor(1,0);
-        this.add.image(8000, 300, 'BSpace').setScrollFactor(1,0);
-        this.add.image(11200, 300, 'BSpace').setScrollFactor(1,0);
+        this.add.image(2020, 300, 'BSpace').setScrollFactor(1,0);
         
         this.player = addPlayer(this.physics, 300, 360);
         this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
@@ -56,7 +53,7 @@ class SceneB extends Phaser.Scene {
         createEnemies(this);
         createMeteors(this);
         sceneBBuildMap(this);
-        createExit(this, this.physics.world.bounds.width - 3900, this.physics.world.bounds.height - 250);
+        createExit(this, this.physics.world.bounds.width - 100, this.physics.world.bounds.height - 250);
         addInterface(this);
         
         this.physics.add.collider(this.loot, this.platforms);
