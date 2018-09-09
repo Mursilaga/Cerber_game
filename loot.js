@@ -42,8 +42,8 @@ function animateSouls (scene) {
 
 function collectLoot (player, loot)
 {
-    player.score += 10;
-    this.scoreText.setText(player.score);
+    config.score += 10;
+    this.scoreText.setText(config.score);
         
     loot.disableBody(true, true);
     

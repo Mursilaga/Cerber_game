@@ -12,7 +12,8 @@ var config = {
             debug: false
         }
     },
-    scene: [ SceneA, SceneB, SceneC, SceneD ]
+    scene: [ SceneA, SceneB, SceneC, SceneD ],
+    score: 0
 };
 var scenesList = ['SceneA', 'SceneB', 'SceneC', 'SceneD'];
 var game = new Phaser.Game(config);
