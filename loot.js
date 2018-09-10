@@ -47,31 +47,19 @@ function collectLoot (player, loot)
         
     loot.disableBody(true, true);
     
-    var cx = Phaser.Math.Between(player.x - 400, player.x + 400);
-    if( (x - player.x > 0) && (x - player.x < 100) )
-        x += 100;
-    else if ( (x - player.x < 0) && (x - player.x > -100) )
-        x -= 100;
-    
-    loot.enableBody(true, cx, player.y - 400, true, true).setVelocity(Phaser.Math.Between(-200, 200), 20);
-    
     var x = Phaser.Math.Between(player.x - 400, player.x + 400);
     if( (x - player.x > 0) && (x - player.x < 100) )
         x += 100;
     else if ( (x - player.x < 0) && (x - player.x > -100) )
         x -= 100;
     
+    loot.enableBody(true, x, player.y - 400, true, true).setVelocity(Phaser.Math.Between(-200, 200), 20);
+    
     if(this.enemies != undefined) {
-        var evilstar = this.enemies.create(x, player.y - 400, 'demon');
-        evilstar.setBounce(1);
-        evilstar.setCollideWorldBounds(true);
-        evilstar.setVelocity(Phaser.Math.Between(-200, 200), 20);
-        evilstar.allowGravity = false;
-        evilstar.setSize(24, 40, true);
-        evilstar.setOffset(21, 20);
+        spawnEnemy(this);
     }
-    
+
     if(this.meteors != undefined) {
-    
+        increaseMeteorsCount(this);
     }
 }

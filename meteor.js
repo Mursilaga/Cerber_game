@@ -8,6 +8,7 @@ function createMeteors(scene) {
     
     scene.meteors = scene.physics.add.group();
     scene.physics.add.collider(scene.meteors, scene.platforms, meteorLanding, null, this);
+    scene.meteorsChance = 5;
 }
 
 function meteorLanding (meteor, platform) {
@@ -20,6 +21,7 @@ function addMeteor(scene) {
     missile.setSize(10, 10, true);
     missile.setGravity(0, -200);
     missile.setOrigin(0.5, 0.8);
+    missile.name = "meteor";
     missile.anims.play('meteor_fly', true);
     if(missile.body.velocity.x != 0) {
         let rot = Math.atan(missile.body.velocity.y / missile.body.velocity.x)
@@ -33,6 +35,10 @@ function addMeteor(scene) {
 }
 
 function randomlyAddMeteor(scene) {
-    if(Phaser.Math.Between(0, 100) < 1) 
+    if(Phaser.Math.Between(0, 1000) < scene.meteorsChance) 
         addMeteor(scene);
+}
+
+function increaseMeteorsCount(scene) {
+    scene.meteorsChance += 5;
 }

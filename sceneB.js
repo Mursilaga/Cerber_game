@@ -83,7 +83,7 @@ class SceneB extends Phaser.Scene {
         managePlayerColliders(this);
         
         //randomlyAddMeteor(this);
-        this.scene.start('SceneC');
+        //this.scene.start('SceneC');
     }
     
     tapDown (pointer) {

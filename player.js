@@ -42,3 +42,30 @@ function animatePlayer (player)
         player.setAlpha(1, 1, 1, 1);
         
 }
+
+function spendLifeOrDie(scene, player) {
+    if (player.lives.countActive(true) > 0) {
+        spendLife(player);
+    }
+    else {
+        scene.physics.pause();
+        player.alive = false;
+        player.ghost_mode = false;
+        scene.player.anims.play('player_dies');
+        config.score = 0;
+        scene.need_restart = true;
+    }
+}
+
+function spendLife(player) {
+    for (var i = 0; i < 3; i++) 
+    {
+        if(player.lives.children.entries[i].active) 
+        {
+            player.lives.children.entries[i].disableBody(true, false);
+            player.lives.children.entries[i].setTint(0x673A3A);
+            break;
+        }
+    }
+ 
+}
