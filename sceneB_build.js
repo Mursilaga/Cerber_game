@@ -52,10 +52,10 @@ function sceneBSetPlatforms (platforms, y_max) {
     platforms.create(3837, y_max-382, 'BPlatform3');
     
     platforms.create(36,   y_max-93, 'BPlatform4').name = "column";
-    platforms.create(843,  y_max-92, 'BPlatform4').name = "column";
-    platforms.create(2585, y_max-89, 'BPlatform4').name = "column";
-    platforms.create(3476, y_max-88, 'BPlatform4').name = "column";
-    platforms.create(4000, y_max-90, 'BPlatform4').name = "column";
+    platforms.create(843,  y_max-93, 'BPlatform4').name = "column";
+    platforms.create(2585, y_max-93, 'BPlatform4').name = "column";
+    platforms.create(3476, y_max-93, 'BPlatform4').name = "column";
+    platforms.create(4000, y_max-93, 'BPlatform4').name = "column";
 }
 
 function sceneBSetLava (scene)  {
@@ -67,7 +67,7 @@ function sceneBSetLava (scene)  {
     });
         
     scene.lava = scene.physics.add.staticGroup();
-    setField(scene.lava, 'lava', 0, scene.physics.world.bounds.width, scene.physics.world.bounds.height - 16, 32);
+    setField(scene.lava, 'lava', 0, scene.physics.world.bounds.width, scene.physics.world.bounds.height-16, 32);
     
     scene.lava.children.iterate(function (child) {
         child.setSize(32, 25, true).setOffset(0, 7).anims.play('lava_animate', true);
@@ -75,17 +75,17 @@ function sceneBSetLava (scene)  {
 }
 
 function sceneBSetGround(platforms, world) {
-    setField(platforms, 'BPlatform', 0, world.bounds.width, world.bounds.height+10, 100);
+    setField(platforms, 'BPlatform', 0, world.bounds.width, world.bounds.height-5, 100);
     platforms.create(273, world.bounds.height - 20, 'BPlatform3');
     platforms.create(759, world.bounds.height - 20, 'BPlatform3');
     platforms.create(1341, world.bounds.height - 20, 'BPlatform3');
     
     platforms.create(140, world.bounds.height - 43, 'BPlatform5');
     platforms.create(640, world.bounds.height - 43, 'BPlatform5');
-    platforms.create(1023, world.bounds.height - 28, 'BPlatform5');
+    platforms.create(1023, world.bounds.height - 43, 'BPlatform5');
     platforms.create(140, world.bounds.height - 43, 'BPlatform5');
     platforms.create(140, world.bounds.height - 43, 'BPlatform5');
-    platforms.create(2473, world.bounds.height - 16, 'BPlatform5');
+    platforms.create(2473, world.bounds.height - 43, 'BPlatform5');
 }
 
 function setPlatformCollision (platforms) {

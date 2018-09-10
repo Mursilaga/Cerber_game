@@ -8,7 +8,7 @@ class SceneB extends Phaser.Scene {
     preload ()
     {
         this.load.image('BSpace', './images/SceneB_Background.png');
-        this.load.image('BPlatform', './images/platform.png');
+        this.load.image('BPlatform', './images/BPlatform1.png');
         this.load.image('BPlatform2', './images/BPlatform2.png');
         this.load.image('BPlatform3', './images/BPlatform3.png');
         this.load.image('BPlatform4', './images/BPlatform4.png');
@@ -19,8 +19,8 @@ class SceneB extends Phaser.Scene {
             { frameWidth: 32, frameHeight: 32 } );
         
         this.load.spritesheet('meteor',
-        './images/meteor.png',
-        { frameWidth: 12, frameHeight: 32 } );
+            './images/meteor.png',
+            { frameWidth: 12, frameHeight: 32 } );
         
         this.load.spritesheet('exit',
             './images/exit.png',

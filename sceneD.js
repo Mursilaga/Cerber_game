@@ -29,8 +29,8 @@ class SceneD extends Phaser.Scene {
     
     create ()
     {
-        this.cameras.main.setBounds(0, 0, 4228, 900);
-        this.physics.world.setBounds(0, 0, 4228, 900);
+        this.cameras.main.setBounds(0, 0, 4228, 600);
+        this.physics.world.setBounds(0, 0, 4228, 600);
         
         this.add.image(528, 300, 'DSpace');
         this.add.image(1585, 300, 'DSpace2');
@@ -47,7 +47,7 @@ class SceneD extends Phaser.Scene {
         createLoot(this);
         addInterface(this);
         createMeteors(this);
-        createExit(this, 500, 50);
+        createExit(this, this.physics.world.bounds.width - 100, this.physics.world.bounds.height - 250);
         
         this.physics.add.collider(this.loot, this.platforms);
         this.physics.add.collider(this.enemies, this.platforms);
