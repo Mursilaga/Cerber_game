@@ -87,13 +87,3 @@ function sceneBSetGround(platforms, world) {
     platforms.create(140, world.bounds.height - 43, 'BPlatform5');
     platforms.create(2473, world.bounds.height - 43, 'BPlatform5');
 }
-
-function setPlatformCollision (platforms) {
-    platforms.children.iterate(function (child) {
-        if(child.name != "column") {
-            child.body.checkCollision.down = false;
-            child.body.checkCollision.left = false;
-            child.body.checkCollision.right = false;
-        }
-    });
-}

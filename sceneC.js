@@ -4,28 +4,66 @@ class SceneC extends Phaser.Scene {
     {
         super('SceneC');
     
-        this.background;
     }
     
     preload ()
     {
-        this.load.image('CSpace', './images/background.jpg');
+        this.platforms = this.physics.add.staticGroup();
+        this.cursors = this.input.keyboard.createCursorKeys();
     }
     
     create ()
     {
-        this.background = this.add.image(400, 300, 'CSpace');
-        this.sceneText = this.add.text(300, 200, 'Scene C', { fontSize: '60px', fill: '#FFFFFF' });
+        this.cameras.main.setBounds(0, 0, 4040, 600);
+        this.physics.world.setBounds(0, 0, 4040, 600);
+        
+        //this.add.image(2020, 300, 'BSpace').setScrollFactor(1,0);
+        
+        this.player = addPlayer(this.physics, 300, 360);
+        this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
+        this.cameras.main.followOffset.set(0, 0);
+        
+        createLoot(this);
+        //createEnemies(this);
+        createMeteors(this);
+        sceneCBuildMap(this);
+        createExit(this, this.physics.world.bounds.width - 100, this.physics.world.bounds.height - 250);
+        addInterface(this);
+        
+        this.physics.add.collider(this.loot, this.platforms);
+        //this.physics.add.collider(this.enemies, this.platforms);
+        this.physics.add.collider(this.player, this.platforms);
+        
+        this.physics.add.overlap(this.player, this.loot, collectLoot, null, this);
+        //this.enemyCollider = this.physics.add.collider(this.player, this.enemies, hitEnemy, null, this);
+                       
+        this.lavaCollider = this.physics.add.collider(this.player, this.lava, hitEnemy, null, this);
+        this.meteorCollider = this.physics.add.collider(this.player, this.meteors, hitEnemy, null, this);
+        this.physics.add.collider(this.loot, this.lava);
+        //this.physics.add.collider(this.enemies, this.lava);
+
     }
     
     update (time, delta)
     {
         startNewSceneIfNeed(this);
         this.input.on('pointerdown', this.tapDown);
+        this.input.on('pointerup', this.tapUp);
+        
+        //animateDemons(this);
+        animateSouls(this);
+        if(this.player.alive)
+            animatePlayer(this.player);
+        
+        managePlayerColliders(this);       
+        randomlyAddMeteor(this);
     }
     
-    tapDown (pointer) 
-    {
-        this.scene.need_new_scene = true;
+    tapDown (pointer) {
+        clickDown(this.scene, pointer);
+    }
+    
+    tapUp (pointer) {
+        clickUp(this.scene, pointer);
     }
 }

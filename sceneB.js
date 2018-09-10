@@ -51,7 +51,7 @@ class SceneB extends Phaser.Scene {
         
         createLoot(this);
         createEnemies(this);
-        createMeteors(this);
+        //createMeteors(this);
         sceneBBuildMap(this);
         createExit(this, this.physics.world.bounds.width - 100, this.physics.world.bounds.height - 250);
         addInterface(this);
@@ -64,7 +64,7 @@ class SceneB extends Phaser.Scene {
         this.enemyCollider = this.physics.add.collider(this.player, this.enemies, hitEnemy, null, this);
                        
         this.lavaCollider = this.physics.add.collider(this.player, this.lava, hitEnemy, null, this);
-        this.meteorCollider = this.physics.add.collider(this.player, this.meteors, hitEnemy, null, this);
+        //this.meteorCollider = this.physics.add.collider(this.player, this.meteors, hitEnemy, null, this);
         this.physics.add.collider(this.loot, this.lava);
         this.physics.add.collider(this.enemies, this.lava);
     }
@@ -83,7 +83,7 @@ class SceneB extends Phaser.Scene {
         managePlayerColliders(this);
         
         //randomlyAddMeteor(this);
-        //this.scene.start('SceneD');
+        this.scene.start('SceneC');
     }
     
     tapDown (pointer) {
