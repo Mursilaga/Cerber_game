@@ -24,7 +24,7 @@ class SceneB extends Phaser.Scene {
             
         this.load.spritesheet('blast',
             './images/blast.png',
-            { frameWidth: 60, frameHeight: 60 } );
+            { frameWidth: 60, frameHeight: 70 } );
         
         this.load.spritesheet('exit',
             './images/exit.png',

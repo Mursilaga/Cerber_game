@@ -22,6 +22,7 @@ function meteorLanding (meteor, platform) {
 }
 
 function meteorBlast (scene, meteor) {
+    meteor.setRotation(0);
     meteor.body.stop();
     meteor.anims.play('meteor_blast', true);
     scene.timer = scene.time.addEvent({ delay: 800, callback: function() {
