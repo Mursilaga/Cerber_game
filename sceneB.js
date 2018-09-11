@@ -21,6 +21,10 @@ class SceneB extends Phaser.Scene {
         this.load.spritesheet('meteor',
             './images/meteor.png',
             { frameWidth: 12, frameHeight: 32 } );
+            
+        this.load.spritesheet('blast',
+            './images/blast.png',
+            { frameWidth: 60, frameHeight: 60 } );
         
         this.load.spritesheet('exit',
             './images/exit.png',
@@ -83,7 +87,7 @@ class SceneB extends Phaser.Scene {
         managePlayerColliders(this);
         
         //randomlyAddMeteor(this);
-        //this.scene.start('SceneC');
+        this.scene.start('SceneC');
     }
     
     tapDown (pointer) {

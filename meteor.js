@@ -6,14 +6,29 @@ function createMeteors(scene) {
         repeat: -1
     });
     
+    scene.anims.create({
+        key: 'meteor_blast',
+        frames: scene.anims.generateFrameNumbers('blast', { start: 0, end: 5 }),
+        frameRate: 6,
+        repeat: 0
+    });
+    
     scene.meteors = scene.physics.add.group();
-    scene.physics.add.collider(scene.meteors, scene.platforms, meteorLanding, null, this);
     scene.meteorsChance = 5;
 }
 
 function meteorLanding (meteor, platform) {
-    meteor.destroy();
+    meteorBlast(this, meteor);
 }
+
+function meteorBlast (scene, meteor) {
+    meteor.body.stop();
+    meteor.anims.play('meteor_blast', true);
+    scene.timer = scene.time.addEvent({ delay: 800, callback: function() {
+        meteor.destroy();
+    } });
+}
+
 
 function addMeteor(scene) {
     var missile = scene.meteors.create(Phaser.Math.Between(scene.player.x - 400, scene.player.x + 400), 0, 'meteor');

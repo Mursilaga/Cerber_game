@@ -40,6 +40,7 @@ class SceneC extends Phaser.Scene {
         this.lavaCollider = this.physics.add.collider(this.player, this.lava, hitEnemy, null, this);
         this.meteorCollider = this.physics.add.collider(this.player, this.meteors, hitEnemy, null, this);
         this.physics.add.collider(this.loot, this.lava);
+        this.physics.add.collider(this.meteors, this.platforms, meteorLanding, null, this);
         //this.physics.add.collider(this.enemies, this.lava);
 
     }

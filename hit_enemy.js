@@ -7,6 +7,7 @@ function hitEnemy (player, enemy)
     
     spendLifeOrDie(this, player);
     
-    if (enemy.name == "meteor")
-        enemy.destroy();
+    if (enemy.name == "meteor") {
+        meteorBlast(this, enemy);
+    }
 }
