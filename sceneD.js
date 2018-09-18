@@ -57,6 +57,7 @@ class SceneD extends Phaser.Scene {
         this.enemyCollider = this.physics.add.collider(this.player, this.enemies, hitEnemy, null, this);
         
         this.meteorCollider = this.physics.add.collider(this.player, this.meteors, hitEnemy, null, this);
+        this.physics.add.collider(this.meteors, this.platforms, meteorLanding, null, this);
         
     //    var evilstar = this.enemies.create(300, 500, 'cyborg');
     //    evilstar.setBounce(0);

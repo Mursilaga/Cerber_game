@@ -1,6 +1,7 @@
 function sceneDBuildMap(scene) {
     sceneD_setGround(scene.platforms, scene.physics.world);
     sceneD_set_platforms(scene.platforms, scene.physics.world);
+    setPlatformCollision(scene.platforms);
 }
 
 function sceneD_set_platforms (platforms, world) { 

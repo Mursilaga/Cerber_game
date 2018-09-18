@@ -8,8 +8,17 @@ class SceneC extends Phaser.Scene {
     
     preload ()
     {
+        //this.load.image('CSpace', './images/SceneB_Background.png');
+        this.load.image('CPlatform2', './images/BPlatform2.png');
+        this.load.image('CPlatform3', './images/BPlatform3.png');
+        this.load.image('CPlatform4', './images/BPlatform4.png');
+        this.load.image('CPlatform5', './images/BPlatform5.png');
+        
         this.platforms = this.physics.add.staticGroup();
         this.cursors = this.input.keyboard.createCursorKeys();
+        this.load.spritesheet('lava_purple',
+            './images/lava32_purple.png',
+            { frameWidth: 32, frameHeight: 32 } );
     }
     
     create ()
@@ -17,7 +26,7 @@ class SceneC extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, 4040, 600);
         this.physics.world.setBounds(0, 0, 4040, 600);
         
-        //this.add.image(2020, 300, 'BSpace').setScrollFactor(1,0);
+        //this.add.image(2020, 300, 'CSpace').setScrollFactor(1,0);
         
         this.player = addPlayer(this.physics, 300, 360);
         this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
