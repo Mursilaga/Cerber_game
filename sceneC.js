@@ -9,10 +9,10 @@ class SceneC extends Phaser.Scene {
     preload ()
     {
         //this.load.image('CSpace', './images/SceneB_Background.png');
-        this.load.image('CPlatform2', './images/BPlatform2.png');
-        this.load.image('CPlatform3', './images/BPlatform3.png');
-        this.load.image('CPlatform4', './images/BPlatform4.png');
-        this.load.image('CPlatform5', './images/BPlatform5.png');
+        this.load.image('CPlatform2', './images/CPlatform2.png');
+        this.load.image('CPlatform3', './images/CPlatform3.png');
+        this.load.image('CPlatform4', './images/CPlatform4.png');
+        this.load.image('CPlatform5', './images/CPlatform5.png');
         
         this.platforms = this.physics.add.staticGroup();
         this.cursors = this.input.keyboard.createCursorKeys();
