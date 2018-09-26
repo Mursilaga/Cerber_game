@@ -8,7 +8,7 @@ class SceneC extends Phaser.Scene {
     
     preload ()
     {
-        //this.load.image('CSpace', './images/SceneB_Background.png');
+        this.load.image('CSpace', './images/SceneC_Background.png');
         this.load.image('CPlatform2', './images/CPlatform2.png');
         this.load.image('CPlatform3', './images/CPlatform3.png');
         this.load.image('CPlatform4', './images/CPlatform4.png');
@@ -26,7 +26,8 @@ class SceneC extends Phaser.Scene {
         this.cameras.main.setBounds(0, 0, 4040, 600);
         this.physics.world.setBounds(0, 0, 4040, 600);
         
-        //this.add.image(2020, 300, 'CSpace').setScrollFactor(1,0);
+        this.add.image(1000, 300, 'CSpace').setScrollFactor(1,0);
+        this.add.image(3000, 300, 'CSpace').setScrollFactor(1,0);
         
         this.player = addPlayer(this.physics, 300, 360);
         this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
