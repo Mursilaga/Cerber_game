@@ -20,7 +20,7 @@ class SceneA extends Phaser.Scene {
     
     preload ()
     {
-        this.load.image('ASpace', './images/background.jpg');
+        this.load.image('ASpace', './images/intro.png');
         
         this.load.spritesheet('player', 
             './images/sobaka.png',
@@ -34,8 +34,7 @@ class SceneA extends Phaser.Scene {
     
     create ()
     {
-        this.background = this.add.image(400, 300, 'ASpace');
-        this.sceneText = this.add.text(300, 200, 'Scene A', { fontSize: '60px', fill: '#FFFFFF' });
+        this.background = this.add.image(config.width/2, config.height/2, 'ASpace');
         
         this.anims.create({
             key: 'player_stand',
