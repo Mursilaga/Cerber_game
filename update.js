@@ -1,7 +1,8 @@
 function startNewSceneIfNeed(scene) {
         if(scene.need_new_scene) {
-        scene.scene.start(getNextScene(scene));
-        scene.need_new_scene = false;
+            gtag('event', 'start ' + getNextScene(scene));
+            scene.scene.start(getNextScene(scene));
+            scene.need_new_scene = false;
     }
 }
 

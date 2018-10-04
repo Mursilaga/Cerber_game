@@ -59,27 +59,6 @@ class SceneD extends Phaser.Scene {
         this.meteorCollider = this.physics.add.collider(this.player, this.meteors, hitEnemy, null, this);
         this.physics.add.collider(this.meteors, this.platforms, meteorLanding, null, this);
         
-    //    var evilstar = this.enemies.create(300, 500, 'cyborg');
-    //    evilstar.setBounce(0);
-    //    evilstar.setCollideWorldBounds(true);
-    //    evilstar.setVelocity(Phaser.Math.Between(-100, -99), 0);
-    //    evilstar.body.setGravityY(100);	
-    //    
-    //    this.anims.create({
-    //        key: 'robot_left',
-    //        frames: this.anims.generateFrameNumbers('cyborg', { start: 0, end: 5 }),
-    //        frameRate: 4,
-    //        repeat: -1
-    //    });
-    //
-    //    this.anims.create({
-    //        key: 'robot_right',
-    //        frames: this.anims.generateFrameNumbers('cyborg', { start: 6, end: 11 }),
-    //        frameRate: 4,
-    //        repeat: -1
-    //    });
-    //    
-    //    evilstar.anims.play('robot_left', true);   
     }
     
     update (time, delta) {

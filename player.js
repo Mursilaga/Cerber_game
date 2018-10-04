@@ -53,6 +53,7 @@ function spendLifeOrDie(scene, player) {
         player.ghost_mode = false;
         scene.player.anims.play('player_dies');
         config.score = 0;
+        gtag('event', 'player dies');
         scene.need_restart = true;
     }
 }

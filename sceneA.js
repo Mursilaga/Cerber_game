@@ -63,6 +63,7 @@ class SceneA extends Phaser.Scene {
             frameRate: 0,
             repeat: 0
         });
+        gtag('event', 'start SceneA');
     }
     
     update (time, delta)
