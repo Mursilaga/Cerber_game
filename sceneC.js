@@ -29,7 +29,7 @@ class SceneC extends Phaser.Scene {
         this.add.image(1000, 300, 'CSpace').setScrollFactor(1,0);
         this.add.image(3000, 300, 'CSpace').setScrollFactor(1,0);
         
-        this.player = addPlayer(this.physics, 300, 360);
+        this.player = addPlayer(this.physics, 50, 360);
         this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
         this.cameras.main.followOffset.set(0, 0);
         
