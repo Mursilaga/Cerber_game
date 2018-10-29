@@ -7,9 +7,6 @@ function sceneCBuildMap(scene) {
 
 function sceneCSetGround(platforms, world) {
     setField(platforms, 'BPlatform', 0, world.bounds.width, world.bounds.height-5, 100);
-    //platforms.create(273, world.bounds.height -  20, 'CPlatform3');
-    //platforms.create(759, world.bounds.height -  20, 'CPlatform3');
-    //platforms.create(1341, world.bounds.height - 20, 'CPlatform3');
     
     platforms.create( 147, world.bounds.height - 43, 'CPlatform5');
     platforms.create(2102, world.bounds.height - 43, 'CPlatform5');

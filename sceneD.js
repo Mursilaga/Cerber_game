@@ -19,9 +19,9 @@ class SceneD extends Phaser.Scene {
         
         this.load.image('ground', './images/ground.png');
             
-        this.load.spritesheet('cyborg', 
-            './images/cyborg.png',
-            { frameWidth: 44, frameHeight: 61 } );
+        this.load.spritesheet('lava_green',
+            './images/lava32_green.png',
+            { frameWidth: 32, frameHeight: 32 } );
 
         this.platforms = this.physics.add.staticGroup();
         this.cursors = this.input.keyboard.createCursorKeys();
@@ -37,12 +37,12 @@ class SceneD extends Phaser.Scene {
         this.add.image(2642, 300, 'DSpace');
         this.add.image(3699, 300, 'DSpace2');
         
-        sceneDBuildMap(this);
         this.player = addPlayer(this.physics, 300, 200);
         
         this.cameras.main.startFollow(this.player, false, 0.5, 0.5);
         this.cameras.main.followOffset.set(0, 0);
         
+        sceneDBuildMap(this);
         createEnemies(this);
         createLoot(this);
         addInterface(this);
@@ -58,7 +58,11 @@ class SceneD extends Phaser.Scene {
         
         this.meteorCollider = this.physics.add.collider(this.player, this.meteors, hitEnemy, null, this);
         this.physics.add.collider(this.meteors, this.platforms, meteorLanding, null, this);
-        
+
+        this.lavaCollider = this.physics.add.collider(this.player, this.lava, hitEnemy, null, this);
+        this.meteorCollider = this.physics.add.collider(this.player, this.meteors, hitEnemy, null, this);
+        this.physics.add.collider(this.loot, this.lava);
+        this.physics.add.collider(this.meteors, this.platforms, meteorLanding, null, this);
     }
     
     update (time, delta) {

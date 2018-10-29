@@ -46,7 +46,7 @@ class SceneC extends Phaser.Scene {
         
         this.physics.add.overlap(this.player, this.loot, collectLoot, null, this);
         //this.enemyCollider = this.physics.add.collider(this.player, this.enemies, hitEnemy, null, this);
-                       
+
         this.lavaCollider = this.physics.add.collider(this.player, this.lava, hitEnemy, null, this);
         this.meteorCollider = this.physics.add.collider(this.player, this.meteors, hitEnemy, null, this);
         this.physics.add.collider(this.loot, this.lava);
