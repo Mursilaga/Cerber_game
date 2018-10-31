@@ -52,7 +52,7 @@ class SceneC extends Phaser.Scene {
         this.physics.add.collider(this.loot, this.lava);
         this.physics.add.collider(this.meteors, this.platforms, meteorLanding, null, this);
         //this.physics.add.collider(this.enemies, this.lava);
-
+        //this.player.ghost_mode = true;
     }
     
     update (time, delta)

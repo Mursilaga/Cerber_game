@@ -9,7 +9,6 @@ class SceneD extends Phaser.Scene {
     preload ()
     {
         this.load.image('DSpace', './images/SceneD_Background.png');
-        this.load.image('DSpace2', './images/SceneD_Background2.png');
         
         this.load.image('DPlatform1', './images/DPlatform1.png');
         this.load.image('DPlatform2', './images/DPlatform2.png');
@@ -29,13 +28,10 @@ class SceneD extends Phaser.Scene {
     
     create ()
     {
-        this.cameras.main.setBounds(0, 0, 4228, 600);
-        this.physics.world.setBounds(0, 0, 4228, 600);
+        this.cameras.main.setBounds(0, 0, 3985, 600);
+        this.physics.world.setBounds(0, 0, 3985, 600);
         
-        this.add.image(528, 300, 'DSpace');
-        this.add.image(1585, 300, 'DSpace2');
-        this.add.image(2642, 300, 'DSpace');
-        this.add.image(3699, 300, 'DSpace2');
+        this.add.image(1992, 300, 'DSpace');
         
         this.player = addPlayer(this.physics, 300, 200);
         
@@ -60,9 +56,9 @@ class SceneD extends Phaser.Scene {
         this.physics.add.collider(this.meteors, this.platforms, meteorLanding, null, this);
 
         this.lavaCollider = this.physics.add.collider(this.player, this.lava, hitEnemy, null, this);
-        this.meteorCollider = this.physics.add.collider(this.player, this.meteors, hitEnemy, null, this);
         this.physics.add.collider(this.loot, this.lava);
         this.physics.add.collider(this.meteors, this.platforms, meteorLanding, null, this);
+        //this.player.ghost_mode = true;
     }
     
     update (time, delta) {

@@ -71,7 +71,7 @@ class SceneB extends Phaser.Scene {
         //this.meteorCollider = this.physics.add.collider(this.player, this.meteors, hitEnemy, null, this);
         this.physics.add.collider(this.loot, this.lava);
         this.physics.add.collider(this.enemies, this.lava);
-        
+        //this.player.ghost_mode = true;
     }
 
     
@@ -88,7 +88,7 @@ class SceneB extends Phaser.Scene {
         managePlayerColliders(this);
         
         //randomlyAddMeteor(this);
-        //this.scene.start('SceneC');
+        //this.scene.start('SceneD');
     }
     
     tapDown (pointer) {
